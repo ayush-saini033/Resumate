@@ -76,7 +76,7 @@ function PreferencesForm() {
                       <input
                         type="text"
                         placeholder="e.g., San Francisco, CA or Remote"
-                        value={resume.preferences.location}
+                        value={resume.preferences?.location}
                         onChange={(e) =>
                           updatePreference("location", e.target.value)
                         }
@@ -102,7 +102,7 @@ function PreferencesForm() {
                           onClick={() => updatePreference("relocation", true)}
                           className={`px-6 py-3 rounded-xl font-medium backdrop-blur-md border transition-all duration-300 
         ${
-          resume.preferences.relocation
+          resume.preferences?.relocation
             ? "bg-blue-500/60 border-blue-400 text-white shadow-lg shadow-blue-500/40"
             : "bg-blue-200/10 border-blue-400/30 text-gray-300 hover:border-blue-400 hover:text-white"
         }`}
@@ -116,7 +116,7 @@ function PreferencesForm() {
                           onClick={() => updatePreference("relocation", false)}
                           className={`px-6 py-3 rounded-xl font-medium backdrop-blur-md border transition-all duration-300 
         ${
-          !resume.preferences.relocation
+          !resume.preferences?.relocation
             ? "bg-blue-500/60 border-blue-400 text-white shadow-lg shadow-blue-500/40"
             : "bg-blue-200/10 border-blue-400/30 text-gray-300 hover:border-blue-400 hover:text-white"
         }`}
@@ -140,19 +140,19 @@ function PreferencesForm() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-800/50">
                 <div className="text-center p-4 rounded-xl bg-purple-500/5 border border-purple-500/10">
                   <div className="text-2xl font-bold text-purple-400 mb-1">
-                    {resume.preferences.jobType ? "1" : "0"}
+                    {resume.preferences?.jobType ? "1" : "0"}
                   </div>
                   <p className="text-gray-400 text-sm">Job Type Selected</p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-blue-500/5 border border-blue-500/10">
                   <div className="text-2xl font-bold text-blue-400 mb-1">
-                    {resume.preferences.location ? "1" : "0"}
+                    {resume.preferences?.location ? "1" : "0"}
                   </div>
                   <p className="text-gray-400 text-sm">Location Set</p>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/10">
                   <div className="text-2xl font-bold text-indigo-400 mb-1">
-                    {resume.preferences.relocation ? "Yes" : "No"}
+                    {resume.preferences?.relocation ? "Yes" : "No"}
                   </div>
                   <p className="text-gray-400 text-sm">Open to Relocate</p>
                 </div>
