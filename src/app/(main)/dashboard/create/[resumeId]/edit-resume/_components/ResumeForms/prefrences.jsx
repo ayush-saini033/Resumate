@@ -56,7 +56,7 @@ function PreferencesForm() {
                             key={type}
                             onClick={() => updatePreference("jobType", type)}
                             className={`p-3 rounded-xl border-2 transition-all duration-300 text-sm font-medium ${
-                              resume.preferences.jobType === type
+                              resume.preferences?.jobType === type
                                 ? "bg-blue-500/20 border-blue-500 text-blue-300"
                                 : "bg-gray-800/50 border-gray-600/50 text-gray-400 hover:border-blue-500/50 hover:text-blue-400"
                             }`}
