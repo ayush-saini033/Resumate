@@ -28,6 +28,8 @@ const useResumeStore = create((set) => ({
     set((state) => ({
       resume: typeof updater === "function" ? updater(state.resume) : updater,
     })),
+
+    
   updateField: (field, value) =>
     set((state) => ({
       resume: { ...state.resume, [field]: value },
