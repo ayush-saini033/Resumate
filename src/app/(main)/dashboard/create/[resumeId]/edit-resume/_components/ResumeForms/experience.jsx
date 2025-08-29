@@ -21,8 +21,6 @@ function ExperienceForm() {
     setResume({ ...resume, experience: [...resume.experience, newExperience] });
   };
 
-  console.log(resume);
-
   const removeExperience = (id) => {
     if (resume.experience.length > 0) {
       setResume({

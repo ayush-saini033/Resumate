@@ -6,8 +6,6 @@ export async function POST(req, { params }) {
     await connectDB();
 
     const {data} = await req.json();
-
-    console.log({...data})
     const {resumeId} =await params
 
     const updatedResume = await Resume.findByIdAndUpdate(

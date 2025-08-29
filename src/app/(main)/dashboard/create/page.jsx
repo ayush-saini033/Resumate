@@ -229,7 +229,6 @@ const CreateResumePage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated Wave Background */}
       <div className="absolute inset-0">
         <svg
           className="absolute inset-0 w-full h-full"
@@ -325,7 +324,6 @@ const CreateResumePage = () => {
           />
         </svg>
       </div>
-
       {/* Floating Particles */}
       <div className="absolute inset-0">
         {particles.map((_, i) => (
@@ -341,7 +339,6 @@ const CreateResumePage = () => {
           ></div>
         ))}
       </div>
-
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
         <div className="grid lg:grid-cols-3 gap-8">
@@ -455,6 +452,156 @@ const CreateResumePage = () => {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes wave1 {
+          0%,
+          100% {
+            d: path(
+              "M0,400 C300,350 600,450 900,400 C1050,375 1150,425 1200,400 L1200,800 L0,800 Z"
+            );
+          }
+
+          50% {
+            d: path(
+              "M0,420 C300,370 600,470 900,420 C1050,395 1150,445 1200,420 L1200,800 L0,800 Z"
+            );
+          }
+        }
+
+        @keyframes wave2 {
+          0%,
+          100% {
+            d: path(
+              "M0,450 C250,400 550,500 850,450 C1000,425 1100,475 1200,450 L1200,800 L0,800 Z"
+            );
+          }
+
+          50% {
+            d: path(
+              "M0,470 C250,420 550,520 850,470 C1000,445 1100,495 1200,470 L1200,800 L0,800 Z"
+            );
+          }
+        }
+
+        @keyframes wave3 {
+          0%,
+          100% {
+            d: path(
+              "M0,500 C200,450 500,550 800,500 C950,475 1050,525 1200,500 L1200,800 L0,800 Z"
+            );
+          }
+
+          50% {
+            d: path(
+              "M0,520 C200,470 500,570 800,520 C950,495 1050,545 1200,520 L1200,800 L0,800 Z"
+            );
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0.3;
+          }
+
+          25% {
+            transform: translateY(-10px) translateX(5px) rotate(90deg);
+            opacity: 0.6;
+          }
+
+          50% {
+            transform: translateY(-20px) translateX(-5px) rotate(180deg);
+            opacity: 0.9;
+          }
+
+          75% {
+            transform: translateY(-10px) translateX(10px) rotate(270deg);
+            opacity: 0.6;
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .wave-animation-1 {
+          animation: wave1 8s ease-in-out infinite;
+        }
+
+        .wave-animation-2 {
+          animation: wave2 10s ease-in-out infinite reverse;
+        }
+
+        .wave-animation-3 {
+          animation: wave3 12s ease-in-out infinite;
+        }
+
+        .animate-float {
+          animation: float linear infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: rgba(30, 41, 59, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: rgba(59, 130, 246, 0.3);
+          border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: rgba(59, 130, 246, 0.5);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Custom gradient text animation */
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+
+          50% {
+            background-position: 100% 50%;
+          }
+
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .gradient-animate {
+          background: linear-gradient(
+            -45deg,
+            #3b82f6,
+            #93c5fd,
+            #60a5fa,
+            #2563eb
+          );
+          background-size: 400% 400%;
+          animation: gradient 15s ease infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+      `}</style>
     </div>
   );
 };

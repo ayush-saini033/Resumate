@@ -9,7 +9,7 @@ function SkillsForm() {
 
   // Add new skill
   const addSkill = () => {
-    const newSkill = { id: Date.now().toString(), name: "", rating: 0 };
+    const newSkill = { id: Date.now(), name: "", rating: 0 };
     setResume({
       ...resume,
       skills: [...resume.skills, newSkill],

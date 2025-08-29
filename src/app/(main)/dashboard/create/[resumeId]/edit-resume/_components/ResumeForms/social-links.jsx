@@ -18,11 +18,10 @@ import { FaXTwitter } from "react-icons/fa6";
 
 function SocialLinksForm() {
   const { resume, setResume } = useResumeStore();
-  console.log(resume.socialLinks);
 
   const addSocialLink = () => {
     const newSocialLink = {
-      id: Date.now().toString(),
+      id: Date.now(),
       name: "",
       url: "",
     };

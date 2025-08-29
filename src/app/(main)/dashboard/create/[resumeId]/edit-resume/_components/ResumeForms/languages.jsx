@@ -13,7 +13,7 @@ function LanguagesForm() {
 
   const addLanguage = () => {
     const newLanguage = {
-      id: Date.now().toString(),
+      id: Date.now(),
       name: "",
       proficiency: "",
     };

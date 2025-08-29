@@ -29,14 +29,14 @@ function EducationForm() {
     }
   };
 
-  const updateEducation = (id, field, value) => {
-    setResume({
-      ...resume,
-      education: resume.education?.map((edu) =>
-        edu.id === id ? { ...edu, [field]: value } : edu
-      ),
-    });
-  };
+const updateEducation = (id, field, value) => {
+  setResume((prev) => ({
+    ...prev,
+    education: (prev.education ?? []).map((edu) =>
+      edu.id === id ? { ...edu, [field]: value } : edu
+    ),
+  }));
+};
 
   const getTotalYears = () => {
     return resume.education?.reduce((total, edu) => {

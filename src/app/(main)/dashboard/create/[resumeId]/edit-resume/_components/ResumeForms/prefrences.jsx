@@ -76,7 +76,7 @@ function PreferencesForm() {
                       <input
                         type="text"
                         placeholder="e.g., San Francisco, CA or Remote"
-                        value={resume.preferences?.location}
+                        value={resume.preferences?.location ?? ""}
                         onChange={(e) =>
                           updatePreference("location", e.target.value)
                         }

@@ -28,6 +28,7 @@ import {
 } from "@/app/(main)/_routes/create-resume.routes";
 import useResumeStore from "@/store/resumeStore";
 import { useParams } from "next/navigation";
+import { ShowToast } from "@/app/(main)/_shared/show-toast";
 
 const btnClass = clsx(
   "border py-2 px-4 rounded-lg flex items-center justify-center gap-1"
@@ -49,11 +50,13 @@ export default function EditResumePage() {
     async function fetchResume() {
       try {
         const res = await axios.get(FETCH_RESUME(resumeId));
-        if(res.data.success) {
-          setResume(res.data.resume)
+        if (res.data.success) {
+          setResume(res.data.resume);
+          ShowToast(true, res.data.message);
         }
       } catch (error) {
         console.log(error);
+        ShowToast(false, error.response.data.message);
       }
     }
     fetchResume();
@@ -99,18 +102,21 @@ export default function EditResumePage() {
   ];
   const StepComponent = steps[currentStep - 1] || null;
 
- async function handleSave() {
-   if (isSaving) return; // ⛔ prevent spamming
-   setIsSaving(true);
-   try {
-     const res = await axios.post(UPDATE_RESUME(resumeId), { data: resume });
-     console.log(res.data);
-   } catch (error) {
-     console.log(error);
-   } finally {
-     setIsSaving(false);
-   }
- }
+  async function handleSave() {
+    if (isSaving) return; // ⛔ prevent spamming
+    setIsSaving(true);
+    try {
+      const res = await axios.post(UPDATE_RESUME(resumeId), { data: resume });
+      if (res.data.success) {
+        ShowToast(true, res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      ShowToast(false, error.response.data.message);
+    } finally {
+      setIsSaving(false);
+    }
+  }
 
   return (
     // Make the page a fixed-height viewport and prevent the body from scrolling
@@ -165,7 +171,9 @@ export default function EditResumePage() {
                     onClick={handleSave}
                     disabled={isSaving}
                     className={`${btnClass} ${
-                      isSaving ? disabledClass : "cursor-pointer bg-blue-700"
+                      isSaving
+                        ? disabledClass
+                        : "cursor-pointer bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-medium shadow-md hover:from-indigo-600 hover:to-blue-700 "
                     }`}
                   >
                     {isSaving ? "Saving..." : "Save"}

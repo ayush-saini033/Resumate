@@ -31,12 +31,12 @@ function AchievementsForm() {
   };
 
   const updateAchievement = (id, field, value) => {
-    setResume({
-      ...resume,
-      achievements: resume.achievements.map((achievement) =>
+    setResume((prev) => ({
+      ...prev,
+      achievements: prev.achievements.map((achievement) =>
         achievement.id === id ? { ...achievement, [field]: value } : achievement
       ),
-    });
+    }));
   };
 
   const getRecentAchievements = () => {

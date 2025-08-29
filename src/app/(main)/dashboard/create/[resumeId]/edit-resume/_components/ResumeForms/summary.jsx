@@ -8,8 +8,6 @@ function SummaryForm() {
   const [isGenerating, setIsGenerating] = useState(false);
   const {resume, setResume} = useResumeStore();
 
-  console.log(resume.summary)
-
   const handleGenerate = async () => {
     if (!summary.trim()) return;
 

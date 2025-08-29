@@ -9,39 +9,38 @@ export async function POST(request) {
 
     const { name, email, profilePic } = await request.json();
 
-    const existUser = await User.findOne({ email });
+    let user = await User.findOne({ email });
 
-    if (existUser) {
-      return NextResponse.json(
-        { message: "User already exists with this email", success: false },
-        { status: 409 }
-      );
+    // If user doesn't exist, create one
+    if (!user) {
+      user = await User.create({
+        name,
+        email,
+        profilePic,
+        credits: 3,
+      });
     }
 
-    const newUser = await User.create({
-      name,
-      email,
-      profilePic,
-      credits: 3,
-    });
-
+    // Generate JWT token for either new or existing user
     const token = jwt.sign(
-      { userId: newUser._id, email: newUser.email },
-      process.env.JWT_SECRET, // use server-only secret
+      { userId: user._id, email: user.email },
+      process.env.JWT_SECRET,
       { expiresIn: "2d" }
     );
 
     const response = NextResponse.json(
       {
-        message: "User registered successfully",
+        message: user.isNew
+          ? "User registered successfully"
+          : "User logged in successfully",
         data: {
-          id: newUser._id,
-          name: newUser.name,
-          email: newUser.email,
+          id: user._id,
+          name: user.name,
+          email: user.email,
         },
         success: true,
       },
-      { status: 201 }
+      { status: user.isNew ? 201 : 200 }
     );
 
     response.cookies.set("token", token, {
@@ -54,9 +53,9 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
-    console.error("Register Error:", error.message);
+    console.error("Register/Login Error:", error.message);
     return NextResponse.json(
-      { message: "Failed to register user", success: false },
+      { message: "Failed to process request", success: false },
       { status: 500 }
     );
   }

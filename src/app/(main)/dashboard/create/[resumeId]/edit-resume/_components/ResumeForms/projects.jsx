@@ -8,7 +8,7 @@ function ProjectsForm() {
 
   const addProject = () => {
     const newProject = {
-      id: Date.now().toString(),
+      id: Date.now(),
       name: "",
       description: "",
       liveUrl: "",

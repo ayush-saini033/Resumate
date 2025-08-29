@@ -57,10 +57,11 @@ const ResumeSchema = new mongoose.Schema(
       },
     ],
 
-    socialLinks: [{ name: String, url: String }],
+    socialLinks: [{ id: Number, name: String, url: String }],
 
     projects: [
       {
+        id: Number,
         name: String,
         description: String,
         liveUrl: String,
@@ -78,6 +79,7 @@ const ResumeSchema = new mongoose.Schema(
 
     languages: [
       {
+        id: Number,
         name: String,
         proficiency: String,
       },
