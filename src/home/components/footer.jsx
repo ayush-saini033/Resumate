@@ -56,7 +56,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
           {/* Product */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-5">Product</h3>
@@ -75,7 +74,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
           {/* Resources */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-5">Resources</h3>
@@ -94,15 +92,22 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
           {/* Company */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-5">Company</h3>
             <ul className="space-y-3">
-              {["About Us", "Pricing", "Contact", "Support"].map((item, i) => (
+              {[
+                { name: "About Us", href: "/about" },
+                { name: "Pricing", href: "/pricing" },
+                { name: "Contact", href: "/contact" },
+                { name: "Support", href: "/support" },
+              ].map((item, i) => (
                 <li key={i}>
-                  <a href="#" className="hover:text-cyan-400 transition-colors">
-                    {item}
+                  <a
+                    href={item.href}
+                    className="hover:text-cyan-400 transition-colors"
+                  >
+                    {item.name}
                   </a>
                 </li>
               ))}

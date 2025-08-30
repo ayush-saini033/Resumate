@@ -50,7 +50,7 @@ const Hero = () => {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-20">
           <button
-            onClick={() => router.push("/auth")}
+            onClick={() => router.push("/dashboard/create")}
             className="group bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg shadow-blue-500/40 hover:from-blue-700 hover:to-cyan-700 transition-all transform hover:scale-110 hover:shadow-blue-500/60"
           >
             Start Building Free
