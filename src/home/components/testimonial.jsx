@@ -3,28 +3,28 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    position: "Software Engineer at Google",
+    name: "Kapil Paliwal",
+    position: "Full Stack Developer",
     avatar:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+      "https://media.licdn.com/dms/image/v2/D5603AQFgZO0p5iBbPg/profile-displayphoto-shrink_200_200/B56ZPkTFXSG4AY-/0/1734702029826?e=1759363200&v=beta&t=vSKCSc_rzrzopndE4eGXWThDgPi_1a69QkH3cPnwRzw",
     content:
       "This resume builder is incredible! I landed my dream job at Google within 2 weeks of using it. The AI suggestions were spot on.",
     rating: 5,
   },
   {
-    name: "Michael Chen",
-    position: "Marketing Director at Netflix",
+    name: "Akash Yadav",
+    position: "Electrical Engineer",
     avatar:
-      "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+      "https://media.licdn.com/dms/image/v2/D4E03AQE39EkCWSZj5Q/profile-displayphoto-shrink_200_200/B4EZRllWAhHMAY-/0/1736871078034?e=1759363200&v=beta&t=23VtaVFXP6m-ZEJyvc-4KOYeUk8ZuPe68Xh0GwO5JEc",
     content:
       "The templates are stunning and professional. I received more interview calls than ever before. Highly recommend!",
     rating: 5,
   },
   {
-    name: "Emily Rodriguez",
-    position: "UX Designer at Apple",
+    name: "Vikas Babu",
+    position: "Software Engineer",
     avatar:
-      "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1757149200&v=beta&t=OwhlW4OG6Y5LIKO_MDlg2BAERSiqKrm3mb5r1vXzSoU",
     content:
       "Simple, elegant, and effective. The mobile editor saved me so much time. Perfect for busy professionals.",
     rating: 5,

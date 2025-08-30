@@ -246,7 +246,7 @@
 }
 
 /* Prose styles (alternative approach using Tailwind Typography concepts) */
-.prose {
+/* .prose {
   max-width: none;
 }
 
@@ -318,7 +318,7 @@
 
 .prose a {
   @apply text-blue-600 hover:text-blue-800 underline;
-}
+} */
 
 @media print {
   #no-print{

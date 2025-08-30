@@ -32,10 +32,23 @@ const Footer = () => {
               dream job faster.
             </p>
             <div className="flex space-x-4">
-              {[Twitter, LinkedIn, Instagram, Mail].map((Icon, i) => (
+              {[
+                { Icon: Twitter, href: "https://twitter.com/AyushJSLab" },
+                {
+                  Icon: LinkedIn,
+                  href: "https://www.linkedin.com/in/ayush-saini-92126a296",
+                },
+                {
+                  Icon: Instagram,
+                  href: "https://www.instagram.com/ayushjslab",
+                },
+                { Icon: Mail, href: "mailto:ayush.jslab@gmail.com" },
+              ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-900 border border-gray-800 hover:border-cyan-400 hover:text-cyan-400 transition-colors"
                 >
                   <Icon className="w-5 h-5" />
@@ -103,17 +116,19 @@ const Footer = () => {
             © 2025 ResumeBuilder Pro. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-              (item, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="hover:text-cyan-400 transition-colors"
-                >
-                  {item}
-                </a>
-              )
-            )}
+            {[
+              { name: "Privacy Policy", link: "/privacy-policy" },
+              { name: "Terms of Service", link: "/terms-of-service" },
+              { name: "Cookie Policy", link: "/cookie-policy" },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.link}
+                className="hover:text-cyan-400 transition-colors"
+              >
+                {item.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>

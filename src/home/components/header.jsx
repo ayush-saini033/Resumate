@@ -28,10 +28,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-10">
-            {["Features", "Templates", "Pricing", "About"].map((item) => (
+            {["Features", "Contact", "Pricing", "About"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={`${item.toLowerCase()}`}
                 className="relative text-gray-300 hover:text-blue-400 font-medium transition-colors group"
               >
                 {item}
