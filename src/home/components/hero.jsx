@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import { ArrowRight, Star, Zap, Shield, Rocket } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden mt-24 md:mt-14">
       {/* Animated Gradient Background */}
@@ -45,7 +49,10 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-20">
-          <button className="group bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg shadow-blue-500/40 hover:from-blue-700 hover:to-cyan-700 transition-all transform hover:scale-110 hover:shadow-blue-500/60">
+          <button
+            onClick={() => router.push("/auth")}
+            className="group bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg shadow-blue-500/40 hover:from-blue-700 hover:to-cyan-700 transition-all transform hover:scale-110 hover:shadow-blue-500/60"
+          >
             Start Building Free
             <ArrowRight className="inline ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>

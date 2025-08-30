@@ -204,11 +204,11 @@ export default function AuthForm() {
 
           <p className="text-center text-gray-400 text-sm">
             By signing in, you accept the{" "}
-            <span className="underline underline-offset-4 hover:text-blue-400 cursor-pointer">
+            <span onClick={() => router.push("/terms-of-service")} className="underline underline-offset-4 hover:text-blue-400 cursor-pointer">
               Terms of Service
             </span>{" "}
             and acknowledge our{" "}
-            <span className="underline underline-offset-4 hover:text-blue-400 cursor-pointer">
+            <span onClick={() => router.push("/privacy-policy")} className="underline underline-offset-4 hover:text-blue-400 cursor-pointer">
               Privacy Policy
             </span>
             .

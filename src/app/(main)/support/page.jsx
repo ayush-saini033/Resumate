@@ -8,7 +8,6 @@ import {
   Settings,
   CreditCard,
   Download,
-  Users,
   MessageCircle,
   Book,
   Video,
