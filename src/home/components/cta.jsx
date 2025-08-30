@@ -42,7 +42,7 @@ const CTA = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button onClick={() => router.push("/dashbaord/create")} className="group bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-10 py-5 rounded-full text-xl font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all transform hover:scale-105 shadow-2xl shadow-blue-600/30">
+          <button onClick={() => router.push("/dashboard/create")} className="group bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-10 py-5 rounded-full text-xl font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all transform hover:scale-105 shadow-2xl shadow-blue-600/30">
             Start Building Your Resume
             <ArrowRight className="inline ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </button>

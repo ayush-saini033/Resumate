@@ -78,7 +78,7 @@ const CheckoutPage = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold">
-                    ${selectedPlan.price[billingType]}
+                    ₹{selectedPlan.price[billingType]}
                   </div>
                   <div className="text-gray-400 text-sm">
                     /{billingType === "monthly" ? "month" : "year"}
@@ -93,7 +93,7 @@ const CheckoutPage = () => {
                       Annual Discount (30%)
                     </span>
                     <span className="text-green-400 font-semibold">
-                      -$
+                      -₹
                       {Math.round(
                         selectedPlan.price.monthly * 12 -
                           selectedPlan.price.yearly
@@ -106,7 +106,7 @@ const CheckoutPage = () => {
               <div className="border-t border-gray-700 pt-4">
                 <div className="flex items-center justify-between text-xl font-bold">
                   <span>Total</span>
-                  <span>${selectedPlan.price[billingType]}</span>
+                  <span>₹ {selectedPlan.price[billingType]}</span>
                 </div>
               </div>
 
