@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Shield, Lock, CreditCard, Star, Zap, Crown } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import { useSearchParams } from "next/navigation";
 const dummyPlan = {
   id: "pro",
   name: "Professional",
@@ -21,6 +21,9 @@ const CheckoutPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(dummyPlan);
   const [billingType, setBillingType] = useState("monthly");
   const [currentPage, setCurrentPage] = useState("checkout");
+
+   const searchParams = useSearchParams();
+   const price = searchParams.get("price");
 
   const router = useRouter();
 
@@ -78,7 +81,7 @@ const CheckoutPage = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold">
-                    ₹{selectedPlan.price[billingType]}
+                    ₹{price}
                   </div>
                   <div className="text-gray-400 text-sm">
                     /{billingType === "monthly" ? "month" : "year"}
@@ -106,7 +109,7 @@ const CheckoutPage = () => {
               <div className="border-t border-gray-700 pt-4">
                 <div className="flex items-center justify-between text-xl font-bold">
                   <span>Total</span>
-                  <span>₹ {selectedPlan.price[billingType]}</span>
+                  <span>₹ {price}</span>
                 </div>
               </div>
 

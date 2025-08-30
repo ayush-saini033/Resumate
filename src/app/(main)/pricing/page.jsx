@@ -170,7 +170,7 @@ const PricingPage = () => {
                 </ul>
 
                 <button
-                  onClick={() => router.push("/checkout")}
+                  onClick={() => router.push(`/checkout?price=${plan.price.monthly}`)}
                   className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
                     plan.popular
                       ? "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg hover:shadow-xl shadow-blue-600/30"
