@@ -42,15 +42,15 @@ const Contact = () => {
       title: "Email Us",
       description: "Get in touch via email for detailed inquiries",
       contact: "hello@resumeforge.com",
-      action: "mailto:hello@resumeforge.com",
+      action: "mailto:ayush.jslab@gmail.com",
       gradient: "from-blue-500 to-blue-600",
     },
     {
       icon: Phone,
       title: "Call Us",
       description: "Speak directly with our support team",
-      contact: "+1 (555) 123-4567",
-      action: "tel:+15551234567",
+      contact: "+91 8824415430",
+      action: "tel:+91 8824415430",
       gradient: "from-cyan-500 to-cyan-600",
     },
     {
@@ -249,11 +249,11 @@ const Contact = () => {
                         Headquarters
                       </h3>
                       <p className="text-gray-300">
-                        123 Innovation Drive
+                        NIT Hamirpur
                         <br />
-                        Tech Valley, CA 94025
+                        Hamirpur,177005 
                         <br />
-                        United States
+                        Himanchal Pradesh
                       </p>
                     </div>
                     <div className="border-t border-gray-700 pt-6">
