@@ -1,29 +1,30 @@
 "use client"
+
 import React from "react";
-import { Cookie, ArrowLeft } from "lucide-react";
+import { Shield, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const CookiePolicy = () => {
-     const router = useRouter();
+const PrivacyPolicy = () => {
+    const router = useRouter();
   return (
     <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
-      <button
-               onClick={() => router.push("/")}
-               className="inline-flex items-center text-blue-400 hover:text-cyan-400 transition-colors duration-200 mb-8 group"
-             >
-               <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
-               Back to Home
-             </button>
+        <button
+          onClick={() => {router.push("/")}}
+          className="inline-flex items-center text-blue-400 hover:text-cyan-400 transition-colors duration-200 mb-8 group"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          Back to Home
+        </button>
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-lg inline-block mb-6">
-            <Cookie className="h-8 w-8 text-black" />
+          <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-lg inline-block mb-6">
+            <Shield className="h-8 w-8 text-black" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Cookie Policy
+            Privacy Policy
           </h1>
           <p className="text-gray-400 text-lg">
             Last updated:{" "}
@@ -40,228 +41,174 @@ const CookiePolicy = () => {
           <div className="prose prose-invert prose-blue max-w-none">
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                What Are Cookies?
+                Introduction
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                Cookies are small text files that are stored on your computer or
-                mobile device when you visit our website. They help us provide
-                you with a better experience by remembering your preferences and
-                improving the functionality of our platform.
+                At ResumeForge, we respect your privacy and are committed to
+                protecting your personal data. This privacy policy explains how
+                we collect, use, and safeguard your information when you use our
+                resume building platform.
               </p>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                Types of Cookies We Use
+                Information We Collect
               </h2>
-              <div className="space-y-6">
-                <div className="bg-black/30 border border-gray-800 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-blue-400 mb-3">
-                    Essential Cookies
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-medium text-blue-400 mb-2">
+                    Personal Information
                   </h3>
-                  <p className="text-gray-300 leading-relaxed mb-3">
-                    These cookies are necessary for the website to function and
-                    cannot be switched off. They enable core functionality such
-                    as security, network management, and accessibility.
+                  <p className="text-gray-300 leading-relaxed">
+                    When you create an account, we collect information such as
+                    your name, email address, and any information you choose to
+                    include in your resume or profile.
                   </p>
-                  <div className="text-sm text-gray-400">
-                    <strong>Examples:</strong> Session management,
-                    authentication, security tokens
-                  </div>
                 </div>
-
-                <div className="bg-black/30 border border-gray-800 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-cyan-400 mb-3">
-                    Analytics Cookies
+                <div>
+                  <h3 className="text-lg font-medium text-blue-400 mb-2">
+                    Usage Data
                   </h3>
-                  <p className="text-gray-300 leading-relaxed mb-3">
-                    These cookies help us understand how visitors interact with
-                    our website by collecting and reporting information
-                    anonymously. This helps us improve our platform.
+                  <p className="text-gray-300 leading-relaxed">
+                    We automatically collect information about how you interact
+                    with our platform, including pages visited, features used,
+                    and time spent on the platform.
                   </p>
-                  <div className="text-sm text-gray-400">
-                    <strong>Examples:</strong> Google Analytics, usage
-                    statistics, performance monitoring
-                  </div>
                 </div>
-
-                <div className="bg-black/30 border border-gray-800 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-blue-400 mb-3">
-                    Functional Cookies
+                <div>
+                  <h3 className="text-lg font-medium text-blue-400 mb-2">
+                    Device Information
                   </h3>
-                  <p className="text-gray-300 leading-relaxed mb-3">
-                    These cookies enable enhanced functionality and
-                    personalization. They may be set by us or by third-party
-                    providers whose services we have added to our pages.
+                  <p className="text-gray-300 leading-relaxed">
+                    We collect information about the device you use to access
+                    our platform, including browser type, operating system, and
+                    IP address.
                   </p>
-                  <div className="text-sm text-gray-400">
-                    <strong>Examples:</strong> Language preferences, theme
-                    settings, resume auto-save
-                  </div>
-                </div>
-
-                <div className="bg-black/30 border border-gray-800 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-cyan-400 mb-3">
-                    Marketing Cookies
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed mb-3">
-                    These cookies track your online activity to help advertisers
-                    deliver more relevant advertising or to limit how many times
-                    you see an ad.
-                  </p>
-                  <div className="text-sm text-gray-400">
-                    <strong>Examples:</strong> Advertising networks, social
-                    media tracking, remarketing
-                  </div>
                 </div>
               </div>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                Managing Your Cookie Preferences
+                How We Use Your Information
+              </h2>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-start">
+                  <span className="bg-blue-500 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></span>
+                  To provide and maintain our resume building services
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-500 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></span>
+                  To improve and personalize your experience on our platform
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-500 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></span>
+                  To communicate with you about updates, features, and support
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-500 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></span>
+                  To analyze usage patterns and improve our services
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-500 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></span>
+                  To comply with legal obligations and protect our rights
+                </li>
+              </ul>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
+                Data Protection & Security
               </h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                You have several options for managing cookies:
+                We implement industry-standard security measures to protect your
+                personal information, including:
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                  <h4 className="text-blue-400 font-medium mb-2">
-                    Browser Settings
-                  </h4>
-                  <p className="text-gray-300 text-sm">
-                    Most browsers allow you to control cookies through their
-                    settings preferences
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-black/30 border border-gray-800 rounded-lg p-4">
+                  <h4 className="text-cyan-400 font-medium mb-2">Encryption</h4>
+                  <p className="text-gray-400 text-sm">
+                    All data is encrypted in transit and at rest
                   </p>
                 </div>
-                <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
+                <div className="bg-black/30 border border-gray-800 rounded-lg p-4">
                   <h4 className="text-cyan-400 font-medium mb-2">
-                    Opt-Out Tools
+                    Access Controls
                   </h4>
-                  <p className="text-gray-300 text-sm">
-                    Use industry opt-out tools to manage advertising cookies
+                  <p className="text-gray-400 text-sm">
+                    Strict access controls and authentication
                   </p>
                 </div>
-              </div>
-
-              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
-                <p className="text-yellow-400 text-sm font-medium mb-2">
-                  ⚠️ Important Note:
-                </p>
-                <p className="text-gray-300 text-sm">
-                  Disabling certain cookies may impact the functionality of our
-                  platform and your user experience.
-                </p>
+                <div className="bg-black/30 border border-gray-800 rounded-lg p-4">
+                  <h4 className="text-cyan-400 font-medium mb-2">
+                    Regular Audits
+                  </h4>
+                  <p className="text-gray-400 text-sm">
+                    Regular security audits and monitoring
+                  </p>
+                </div>
+                <div className="bg-black/30 border border-gray-800 rounded-lg p-4">
+                  <h4 className="text-cyan-400 font-medium mb-2">
+                    Data Backup
+                  </h4>
+                  <p className="text-gray-400 text-sm">
+                    Secure, redundant data backup systems
+                  </p>
+                </div>
               </div>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                Third-Party Cookies
+                Your Rights
               </h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Some cookies on our site are set by third-party services. We use
-                these services to:
+                You have the following rights regarding your personal data:
               </p>
               <div className="space-y-3">
-                <div className="flex items-center p-3 bg-gray-800/30 border border-gray-700 rounded-lg">
-                  <span className="text-blue-400 font-medium min-w-[100px]">
-                    Analytics:
-                  </span>
-                  <span className="text-gray-300">
-                    Google Analytics for website performance insights
+                <div className="flex items-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                  <span className="text-blue-400 font-medium">Access:</span>
+                  <span className="text-gray-300 ml-2">
+                    Request access to your personal data
                   </span>
                 </div>
-                <div className="flex items-center p-3 bg-gray-800/30 border border-gray-700 rounded-lg">
-                  <span className="text-cyan-400 font-medium min-w-[100px]">
-                    Support:
-                  </span>
-                  <span className="text-gray-300">
-                    Customer support chat and help desk functionality
+                <div className="flex items-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                  <span className="text-blue-400 font-medium">Correction:</span>
+                  <span className="text-gray-300 ml-2">
+                    Request correction of inaccurate data
                   </span>
                 </div>
-                <div className="flex items-center p-3 bg-gray-800/30 border border-gray-700 rounded-lg">
-                  <span className="text-blue-400 font-medium min-w-[100px]">
-                    Security:
+                <div className="flex items-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                  <span className="text-blue-400 font-medium">Deletion:</span>
+                  <span className="text-gray-300 ml-2">
+                    Request deletion of your personal data
                   </span>
-                  <span className="text-gray-300">
-                    Fraud detection and prevention services
+                </div>
+                <div className="flex items-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                  <span className="text-blue-400 font-medium">
+                    Portability:
+                  </span>
+                  <span className="text-gray-300 ml-2">
+                    Request a copy of your data in a portable format
                   </span>
                 </div>
               </div>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                Cookie Retention
-              </h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                Different types of cookies are stored for different periods:
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
-                  <thead className="bg-gray-800">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-blue-400 font-medium">
-                        Cookie Type
-                      </th>
-                      <th className="px-4 py-3 text-left text-blue-400 font-medium">
-                        Duration
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-700">
-                    <tr className="bg-gray-900/30">
-                      <td className="px-4 py-3 text-gray-300">
-                        Session Cookies
-                      </td>
-                      <td className="px-4 py-3 text-gray-300">
-                        Until browser is closed
-                      </td>
-                    </tr>
-                    <tr className="bg-gray-900/30">
-                      <td className="px-4 py-3 text-gray-300">
-                        Persistent Cookies
-                      </td>
-                      <td className="px-4 py-3 text-gray-300">Up to 2 years</td>
-                    </tr>
-                    <tr className="bg-gray-900/30">
-                      <td className="px-4 py-3 text-gray-300">
-                        Analytics Cookies
-                      </td>
-                      <td className="px-4 py-3 text-gray-300">26 months</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
-                Updates to This Policy
-              </h2>
-              <p className="text-gray-300 leading-relaxed">
-                We may update this Cookie Policy from time to time to reflect
-                changes in our practices or for other operational, legal, or
-                regulatory reasons. We will notify you of any material changes
-                by posting the new policy on this page.
-              </p>
-            </section>
-
-            <section>
               <h2 className="text-2xl font-semibold text-white mb-4 border-l-4 border-blue-500 pl-4">
                 Contact Us
               </h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                If you have any questions about our use of cookies, please
-                contact us:
+              <p className="text-gray-300 leading-relaxed">
+                If you have any questions about this Privacy Policy or wish to
+                exercise your rights, please contact our Data Protection Officer
+                at:
               </p>
-              <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-                <p className="text-blue-400">Email: cookies@resumeforge.com</p>
-                <p className="text-blue-400">Phone: +1 (555) 123-4567</p>
+              <div className="mt-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
+                <p className="text-blue-400">Email: privacy@resumeforge.com</p>
                 <p className="text-blue-400">
-                  Address: 789 Cookie Lane, Web City, WC 98765
+                  Address: 123 Privacy Street, Data City, DC 12345
                 </p>
               </div>
             </section>
@@ -272,4 +219,4 @@ const CookiePolicy = () => {
   );
 };
 
-export default CookiePolicy;
+export default PrivacyPolicy;
