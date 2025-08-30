@@ -226,7 +226,7 @@ const AboutUs = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -263,7 +263,7 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Mission Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-500/5 to-cyan-500/5">
@@ -285,7 +285,7 @@ const AboutUs = () => {
               sure yours stands out."
             </blockquote>
             <cite className="text-gray-400 text-sm mt-4 block">
-              - Sarah Chen, CEO & Founder
+              - Ayush Saini, CEO & Founder
             </cite>
           </div>
         </div>
