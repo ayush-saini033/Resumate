@@ -177,6 +177,13 @@ const TermsOfService = () => {
                   Address: 123 Legal Avenue, Terms City, TC 54321
                 </p>
               </div>
+
+              <div>
+                OWNER : Ayush Saini
+                <p className="text-gray-400 text-sm mt-2">
+                  All sales are final. We do not offer refunds.
+                </p>
+              </div>
             </section>
           </div>
         </div>
