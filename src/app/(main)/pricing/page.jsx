@@ -7,7 +7,7 @@ const plans = [
   {
     id: "basic",
     name: "Basic",
-    price: { monthly: 9, yearly: 79 },
+    price: { monthly: 99, yearly: 79 },
     description: "Perfect for job seekers starting their career",
     features: [
       "3 Professional Templates",
@@ -23,7 +23,7 @@ const plans = [
   {
     id: "pro",
     name: "Professional",
-    price: { monthly: 19, yearly: 179 },
+    price: { monthly: 199, yearly: 179 },
     description: "Most popular choice for serious professionals",
     features: [
       "15+ Premium Templates",
@@ -42,7 +42,7 @@ const plans = [
   {
     id: "executive",
     name: "Executive",
-    price: { monthly: 39, yearly: 349 },
+    price: { monthly: 399, yearly: 349 },
     description: "Premium features for C-level executives",
     features: [
       "All Pro Features",
