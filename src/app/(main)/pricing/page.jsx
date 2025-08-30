@@ -147,7 +147,7 @@ const PricingPage = () => {
 
                 <div className="mb-8">
                   <span className="text-5xl font-bold">
-                    ${plan.price[billingType]}
+                    ₹{plan.price[billingType]}
                   </span>
                   <span className="text-gray-400 ml-2">
                     /{billingType === "monthly" ? "mo" : "yr"}

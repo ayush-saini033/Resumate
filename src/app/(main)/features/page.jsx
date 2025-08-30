@@ -85,13 +85,13 @@ const FeaturePage = () => {
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-black to-blue-950/30"></div>
         <div className="relative max-w-7xl mx-auto px-6 py-20">
-        <button
-          onClick={() => router.push("/")}
-          className="inline-flex items-center text-blue-400 hover:text-cyan-400 transition-colors duration-200 mb-8 group"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
-          Back to Home
-        </button>
+          <button
+            onClick={() => router.push("/")}
+            className="inline-flex items-center text-blue-400 hover:text-cyan-400 transition-colors duration-200 mb-8 group"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+            Back to Home
+          </button>
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
               <Sparkles className="w-4 h-4 text-blue-400 mr-2" />
@@ -272,7 +272,10 @@ const FeaturePage = () => {
             >
               Start Building for Free
             </button>
-            <button className="border border-gray-600 hover:border-blue-400 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-blue-500/10">
+            <button
+              onClick={() => router.push("/dashbaord/create")}
+              className="border border-gray-600 hover:border-blue-400 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-blue-500/10"
+            >
               View Sample Resumes
             </button>
           </div>
