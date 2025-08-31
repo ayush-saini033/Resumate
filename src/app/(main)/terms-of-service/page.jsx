@@ -172,9 +172,9 @@ const TermsOfService = () => {
                 contact us:
               </p>
               <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-                <p className="text-cyan-400">Email: legal@resumeforge.com</p>
+                <p className="text-cyan-400">Email: ayush.jslab@gmail.com</p>
                 <p className="text-cyan-400">
-                  Address: 123 Legal Avenue, Terms City, TC 54321
+                  Address: NIT Hamirpur , Himanchal Pradesh
                 </p>
               </div>
 

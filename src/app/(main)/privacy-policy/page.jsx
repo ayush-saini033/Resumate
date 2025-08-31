@@ -206,9 +206,9 @@ const PrivacyPolicy = () => {
                 at:
               </p>
               <div className="mt-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-                <p className="text-blue-400">Email: privacy@resumeforge.com</p>
+                <p className="text-blue-400">Email: ayush.jslab@gmail.com</p>
                 <p className="text-blue-400">
-                  Address: 123 Privacy Street, Data City, DC 12345
+                  Address: NIT Hamirpur , Himanchal Pradesh
                 </p>
               </div>
             </section>

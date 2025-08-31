@@ -11,6 +11,13 @@ export async function GET() {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
+    if (!token) {
+      return NextResponse.json(
+        { message: "No token provided", success: false },
+        { status: 401 }
+      );
+    }
+
     const decoded = jwt.verify(token, secret);
 
     const existUser = await User.findById(decoded.userId);
