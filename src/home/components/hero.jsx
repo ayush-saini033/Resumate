@@ -56,9 +56,9 @@ const Hero = () => {
             Start Building Free
             <ArrowRight className="inline ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          {/* <button className="px-10 py-4 border-2 border-gray-700 text-gray-300 rounded-full text-lg font-semibold hover:border-blue-400 hover:text-white hover:shadow-md hover:shadow-blue-500/30 transition-all">
+          <button className="px-10 py-4 border-2 border-gray-700 text-gray-300 rounded-full text-lg font-semibold hover:border-blue-400 hover:text-white hover:shadow-md hover:shadow-blue-500/30 transition-all">
             View Templates
-          </button> */}
+          </button>
         </div>
 
         {/* Trust Indicators */}

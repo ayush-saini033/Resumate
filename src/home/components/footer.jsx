@@ -16,7 +16,7 @@ const Footer = () => {
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Section */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
@@ -56,10 +56,9 @@ const Footer = () => {
               ))}
             </div>
           </div>
+
           {/* Product */}
-
-
-          {/* <div>
+          <div>
             <h3 className="text-white font-semibold text-lg mb-5">Product</h3>
             <ul className="space-y-3">
               {[
@@ -75,13 +74,10 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div> */}
-
+          </div>
 
           {/* Resources */}
-
-
-          {/* <div>
+          <div>
             <h3 className="text-white font-semibold text-lg mb-5">Resources</h3>
             <ul className="space-y-3">
               {[
@@ -97,8 +93,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div> */}
-
+          </div>
 
           {/* Company */}
           <div>
@@ -108,7 +103,6 @@ const Footer = () => {
                 { name: "About Us", href: "/about" },
                 { name: "Pricing", href: "/pricing" },
                 { name: "Contact", href: "/contact" },
-                // { name: "Support", href: "/support" },
               ].map((item, i) => (
                 <li key={i}>
                   <a

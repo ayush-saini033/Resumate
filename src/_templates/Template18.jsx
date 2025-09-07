@@ -1,4 +1,4 @@
-import useResumeStore from "../../../../store/resumeStore";
+import useResumeStore from "../store/resumeStore";
 
 const Template18 = () => {
   const { resume } = useResumeStore();

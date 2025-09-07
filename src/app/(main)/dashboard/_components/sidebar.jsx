@@ -12,7 +12,7 @@ import {
   ChevronRight,
   ChevronLeft,
 } from "lucide-react";
-
+import { TbTemplate } from "react-icons/tb";
 import { Macondo } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -31,7 +31,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   const menuItems = [
     { icon: FilePlus, tab: "create", label: "Create Resume" },
     { icon: FileText, tab: "edit", label: "Edit Resume" },
-    { icon: Heart, tab: "favourites", label: "Favourite Resumes" },
+    { icon: TbTemplate, tab: "templates", label: "Templates" },
     { icon: CreditCard, tab: "billing", label: "Billing" },
     { icon: BarChart3, tab: "analytics", label: "Analytics" },
     { icon: Download, tab: "downloads", label: "Downloads" },

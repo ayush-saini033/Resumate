@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://resumate-henna.vercel.app
+
+# Sitemaps
+Sitemap: https://resumate-henna.vercel.app/sitemap.xml

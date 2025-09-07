@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Shield, Lock, CreditCard, Star, Zap, Crown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import axios from "axios";
 const dummyPlan = {
   id: "pro",
   name: "Professional",
@@ -24,6 +25,16 @@ const CheckoutPage = () => {
 
   const searchParams = useSearchParams();
   const price = searchParams.get("price");
+
+  const handleCheckout = async () => {
+    try {
+      const res = await axios.post("/api/purchase-product");
+      window.PhonePeCheckout.transact({ tokenUrl, callback, type: "IFRAME" });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const router = useRouter();
 
@@ -176,7 +187,7 @@ const CheckoutPage = () => {
 
               {/* Continue Button */}
               <button
-                onClick={() => alert("Proceeding to payment...")}
+                onClick={() => handleCheckout()}
                 className="w-full mt-6 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-white hover:from-blue-700 hover:to-cyan-700 transition-all"
               >
                 Continue
@@ -185,6 +196,7 @@ const CheckoutPage = () => {
           </div>
         </div>
       </div>
+      <script src="https://mercury.phonepe.com/web/bundle/checkout.js"></script>
     </div>
   );
 };

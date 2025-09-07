@@ -12,16 +12,14 @@ import AchievementsForm from "./_components/ResumeForms/achievement";
 import PreferencesForm from "./_components/ResumeForms/prefrences";
 import ProjectsForm from "./_components/ResumeForms/projects";
 
-import Template1 from "../../../templates/Template1";
+import Template1 from "../../../../../../_templates/Template1";
 import clsx from "clsx";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
 import { useReactToPrint } from "react-to-print";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-
 import { TbTemplate } from "react-icons/tb";
-
 import {
   UPDATE_RESUME,
   FETCH_RESUME,
@@ -29,7 +27,7 @@ import {
 import useResumeStore from "@/store/resumeStore";
 import { useParams } from "next/navigation";
 import { ShowToast } from "@/app/(main)/_shared/show-toast";
-
+import "./html.css";
 const btnClass = clsx(
   "border py-2 px-4 rounded-lg flex items-center justify-center gap-1"
 );
@@ -65,26 +63,54 @@ export default function EditResumePage() {
   // ✅ using contentRef for react-to-print
   const handlePrint = useReactToPrint({
     contentRef: printref,
-    documentTitle: "resume",
+    documentTitle: "",
     pageStyle: `
-      @page {
-        size: A4;
-        margin: 20mm 15mm 25mm 15mm; /* top right bottom left */
+    @page {
+      size: A4;
+      margin: 15mm 12mm 15mm 12mm;
+    }
+    @media print {
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
       }
-      @media print {
-        body {
-          -webkit-print-color-adjust: exact;
-        }
-        .resume-section {
-          page-break-inside: avoid;
-          margin-bottom: 20px;
-        }
-        .page-break {
-          page-break-before: always;
-          margin-top: 30px;
-        }
+      
+      html {
+        margin: 0;
+        padding: 0;
       }
-    `,
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      .resume-section {
+        page-break-inside: avoid;
+        margin-bottom: 15px;
+      }
+      
+      .page-break {
+        page-break-before: always;
+        margin-top: 0;
+      }
+    }
+  `,
+    onBeforeGetContent: () => {
+      // Hide elements before printing
+      const elementsToHide = document.querySelectorAll(
+        "header, nav, .no-print"
+      );
+      elementsToHide.forEach((el) => (el.style.display = "none"));
+    },
+    onAfterPrint: () => {
+      // Show elements after printing
+      const elementsToShow = document.querySelectorAll(
+        "header, nav, .no-print"
+      );
+      elementsToShow.forEach((el) => (el.style.display = ""));
+    },
   });
 
   const steps = [

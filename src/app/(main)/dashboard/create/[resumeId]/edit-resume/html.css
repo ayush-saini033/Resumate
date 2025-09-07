@@ -116,168 +116,84 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 
- /* Custom styles for HTML content rendering */
-.html-content {
-
-  /* Headings */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold text-gray-900 mb-3 mt-4;
-  }
-
-  h1 {
-    @apply text-2xl;
-  }
-
-  h2 {
-    @apply text-xl;
-  }
-
-  h3 {
-    @apply text-lg;
-  }
-
-  h4 {
-    @apply text-base;
-  }
-
-  h5 {
-    @apply text-sm;
-  }
-
-  h6 {
-    @apply text-xs;
-  }
-
-  /* Paragraphs */
-  p {
-    @apply mb-4 text-gray-700;
-  }
-
-  /* Lists */
-  ul,
-  ol {
-    @apply mb-4 ml-6;
-  }
-
-  ul {
-    @apply list-disc;
-  }
-
-  ol {
-    @apply list-decimal;
-  }
-
-  li {
-    @apply mb-2 text-gray-700;
-  }
-
-  /* Text formatting */
-  strong,
-  b {
-    @apply font-bold text-gray-900;
-  }
-
-  em,
-  i {
-    @apply italic;
-  }
-
-  u {
-    @apply underline;
-  }
-
-  /* Links */
-  a {
-    @apply text-blue-600 hover:text-blue-800 underline;
-  }
-
-  /* Blockquotes */
-  blockquote {
-    @apply border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4;
-  }
-
-  /* Code */
-  code {
-    @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
-  }
-
-  pre {
-    @apply bg-gray-100 p-4 rounded overflow-x-auto mb-4 text-sm font-mono whitespace-pre-wrap border border-gray-200;
-  }
-
-  pre code {
-    @apply bg-transparent p-0;
-  }
-
-  /* Tables */
-  table {
-    @apply w-full border-collapse border border-gray-300 mb-4;
-  }
-
-  th,
-  td {
-    @apply border border-gray-300 px-3 py-2 text-left;
-  }
-
-  th {
-    @apply bg-gray-100 font-bold;
-  }
-
-  /* Images */
-  img {
-    @apply max-w-full h-auto rounded;
-  }
-
-  /* Horizontal rules */
-  hr {
-    @apply border-gray-300 my-6;
-  }
+/* Prose styles (alternative approach using Tailwind Typography concepts) */
+.prose {
+  max-width: none;
 }
 
-@media print {
-  @page {
-    size: A4;
-    margin: 15mm 12mm 15mm 12mm;
-    /* top right bottom left */
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  .resume-container {
-    width: 100%;
-    margin: 0;
-  }
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-bold text-gray-900;
 }
 
- /* Custom scrollbar */
- ::-webkit-scrollbar {
-   width: 8px;
- }
+.prose h1 {
+  @apply text-2xl;
+}
 
- ::-webkit-scrollbar-track {
-   background: #1a1a1a;
- }
+.prose h2 {
+  @apply text-xl;
+}
 
- ::-webkit-scrollbar-thumb {
-   background: #3b82f6;
-   border-radius: 4px;
- }
+.prose h3 {
+  @apply text-lg;
+}
 
- ::-webkit-scrollbar-thumb:hover {
-   background: #2563eb;
- }
+.prose p {
+  @apply  text-gray-700 leading-relaxed;
+}
 
+.prose ul,
+.prose ol {
+  @apply  ml-6;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply  text-gray-700;
+}
+
+.prose strong {
+  @apply font-bold text-gray-900;
+}
+
+.prose em {
+  @apply italic;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4;
+}
+
+.prose code {
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply bg-gray-100 p-4 rounded overflow-x-auto  text-sm font-mono whitespace-pre-wrap border border-gray-200;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0;
+}
+
+.prose a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}

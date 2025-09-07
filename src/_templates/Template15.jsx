@@ -1,7 +1,7 @@
-import useResumeStore from "../../../../store/resumeStore";
+import useResumeStore from "../store/resumeStore";
 const Template15 = () => {
- const { resume } = useResumeStore();
- const resumeInfo = resume;
+  const { resume } = useResumeStore();
+  const resumeInfo = resume;
 
   return (
     <div className="max-w-5xl mx-auto p-10 bg-white font-sans text-gray-900 shadow-lg rounded-md">

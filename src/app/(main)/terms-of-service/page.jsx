@@ -178,8 +178,9 @@ const TermsOfService = () => {
                 </p>
               </div>
 
-              <div>
-                OWNER : Ayush Saini
+              <div className="mt-6 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
+                <h4 className="text-white font-semibold mb-2">Owner</h4>
+                <p className="text-cyan-400">Ayush Saini</p>
                 <p className="text-gray-400 text-sm mt-2">
                   All sales are final. We do not offer refunds.
                 </p>

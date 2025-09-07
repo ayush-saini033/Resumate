@@ -1,5 +1,5 @@
- const { resume } = useResumeStore();
-  const resumeInfo = resume;
+
+import useResumeStore from "@/store/resumeStore";
 import {
   Mail,
   Phone,
