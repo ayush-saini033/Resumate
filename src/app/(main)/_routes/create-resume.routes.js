@@ -5,3 +5,6 @@ export const UPDATE_RESUME = (resumeId) =>
 
 export const FETCH_RESUME = (resumeId) =>
   `${process.env.NEXT_PUBLIC_API_URI}/api/fetch-resume/${resumeId}`;
+
+
+export const FETCH_REMAINING_CREDITS = `/api/get-remaining-credits`;

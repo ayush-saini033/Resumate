@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FileText, Clock, Star, Download, Edit3, FilePlus2, Loader2 } from "lucide-react";
+import {
+  FileText,
+  Clock,
+  Star,
+  Download,
+  Edit3,
+  FilePlus2,
+  Loader2,
+} from "lucide-react";
 
 import {
   Dialog,
@@ -11,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import dayjs from "dayjs";
 
 import { CREATE_RESUME } from "@/app/(main)/_routes/create-resume.routes";
 import { Macondo } from "next/font/google";
@@ -19,6 +28,9 @@ import axios from "axios";
 import { ShowToast } from "@/app/(main)/_shared/show-toast";
 import { useRouter } from "next/navigation";
 
+import { FETCH_REMAINING_CREDITS } from "../../_routes/create-resume.routes";
+import {FETCH_FIRST_THREE_RESUME} from "../../_routes/fetch-resume.routes"
+
 const macondo = Macondo({
   subsets: ["latin"],
   weight: ["400"],
@@ -26,12 +38,12 @@ const macondo = Macondo({
 
 const CreateResumeButton = () => {
   const [title, setTitle] = useState("");
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleEdit = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const res = await axios.post(CREATE_RESUME, {
         title,
       });
@@ -39,7 +51,7 @@ const CreateResumeButton = () => {
       console.log(res.data);
       if (res.data.success) {
         ShowToast(true, res.data.message);
-        router.push(`/dashboard/create/${res.data.resumeId}/edit-resume`)
+        router.push(`/dashboard/create/${res.data.resumeId}/edit-resume`);
       }
     } catch (error) {
       console.log(error);
@@ -47,8 +59,8 @@ const CreateResumeButton = () => {
         false,
         error.response?.data?.message || "Something went wrong !!"
       );
-    } finally{
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -127,6 +139,19 @@ const CreateResumeButton = () => {
 };
 
 const CreditsDisplay = ({ credits = 15 }) => {
+  const [remainingCredits, setRemainingCredits] = useState(3);
+
+  useEffect(() => {
+    async function fetchCredits() {
+      const res = await axios.get(FETCH_REMAINING_CREDITS);
+
+      if(res.data.success) {
+        setRemainingCredits(res.data.credits)
+      }
+    }
+    fetchCredits();
+  },[]);
+
   return (
     <div className="bg-gradient-to-r from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
       <div className="flex items-center justify-between mb-4">
@@ -134,11 +159,15 @@ const CreditsDisplay = ({ credits = 15 }) => {
         <Star className="w-6 h-6 text-yellow-400" />
       </div>
       <div className="relative">
-        <div className="text-4xl font-bold text-blue-400 mb-2">{credits}</div>
+        <div className="text-4xl font-bold text-blue-400 mb-2">
+          {3 - remainingCredits}/3
+        </div>
         <div className="w-full bg-slate-700 rounded-full h-2">
           <div
             className="bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full transition-all duration-500"
-            style={{ width: `${Math.min((credits / 20) * 100, 100)}%` }}
+            style={{
+              width: `${Math.min(((3 - remainingCredits) / 3) * 100, 100)}%`,
+            }}
           ></div>
         </div>
         <p className="text-slate-400 text-sm mt-2">Credits refresh monthly</p>
@@ -148,40 +177,47 @@ const CreditsDisplay = ({ credits = 15 }) => {
 };
 
 const RecentResumeCard = ({ resume, index }) => {
-  return (
-    <div
-      className="group bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer transform hover:scale-105"
-      style={{
-        animationDelay: `${index * 0.1}s`,
-        animation: "slideInUp 0.6s ease-out forwards",
-      }}
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-            <FileText className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
-              {resume.title}
-            </h4>
-            <p className="text-slate-400 text-sm">{resume.type}</p>
-          </div>
-        </div>
-        <Download className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
-      </div>
 
-      <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center gap-2 text-slate-400">
-          <Clock className="w-4 h-4" />
-          <span>Modified {resume.lastModified}</span>
-        </div>
-        <div className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs">
-          {resume.status}
-        </div>
-      </div>
-    </div>
-  );
+   return (
+     <div
+       className="group bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer transform hover:scale-105"
+       style={{
+         animationDelay: `${index * 0.1}s`,
+         animation: "slideInUp 0.6s ease-out forwards",
+       }}
+     >
+       {/* Header */}
+       <div className="flex items-start justify-between mb-4">
+         <div className="flex items-center gap-3">
+           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+             <FileText className="w-6 h-6 text-white" />
+           </div>
+           <div>
+             <h4 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
+               {resume.title || "Untitled Resume"}
+             </h4>
+             <p className="text-slate-400 text-sm">
+               {resume.firstName} {resume.lastName} •{" "}
+               {resume.jobTitle || "No Job Title"}
+             </p>
+           </div>
+         </div>
+         <Download className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+       </div>
+
+       {/* Footer */}
+       <div className="flex items-center justify-between text-sm">
+         <div className="flex items-center gap-2 text-slate-400">
+           <Clock className="w-4 h-4" />
+           <span>Modified {dayjs(resume.updatedAt).format("DD MMM YYYY")}</span>
+         </div>
+         <div className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs">
+           {resume.status || "Draft"}
+         </div>
+       </div>
+     </div>
+   );
+
 };
 
 const CreateResumePage = () => {
@@ -198,6 +234,18 @@ const CreateResumePage = () => {
     }));
     setParticles(generated);
   }, []);
+
+    const [fetchedResume, setFetchedResume] = useState([]);
+    useEffect(() => {
+      async function fetchCredits() {
+        const res = await axios.get(FETCH_FIRST_THREE_RESUME);
+
+        if (res.data.success) {
+          setFetchedResume(res.data.data);
+        }
+      }
+      fetchCredits();
+    }, []);
 
   const recentResumes = [
     {
@@ -440,9 +488,9 @@ const CreateResumePage = () => {
                 Recent Resumes
               </h2>
               <div className="space-y-4">
-                {recentResumes.map((resume, index) => (
+                {fetchedResume.map((resume, index) => (
                   <RecentResumeCard
-                    key={resume.id}
+                    key={index}
                     resume={resume}
                     index={index}
                   />

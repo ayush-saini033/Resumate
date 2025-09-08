@@ -18,98 +18,8 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { MdOutlineSupportAgent } from "react-icons/md";
 import { useRouter } from "next/navigation";
-
-const AnimatedShape = ({ type, className, delay = 0, duration = 8 }) => {
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    setIsAnimating(true);
-  }, []);
-
-  const animationStyle = {
-    transform: isAnimating
-      ? "translateY(0px) rotate(0deg) scale(1)"
-      : "translateY(0px) rotate(0deg) scale(1)",
-    transition: "none",
-    animation: isAnimating
-      ? `float-complex ${duration}s ease-in-out infinite ${delay}s`
-      : "none",
-    opacity: 0.1,
-  };
-
-  const baseClasses = "absolute pointer-events-none transition-all";
-
-  const shapes = {
-    circle: (
-      <Circle
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-    square: (
-      <Square
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-    triangle: (
-      <Triangle
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-    hexagon: (
-      <Hexagon
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-    star: (
-      <Star
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-    diamond: (
-      <Diamond
-        className={`${baseClasses} ${className} animate-float-complex`}
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          opacity: 0.1,
-        }}
-        strokeWidth={1.5}
-      />
-    ),
-  };
-
-  return shapes[type] || shapes.circle;
-};
+import {DELETE_RESUME_BY_ID} from "../../_routes/delete-resume.route"
+import { ShowToast } from "../../_shared/show-toast";
 
 const FloatingDot = ({ className, delay = 0, animationType = "ping" }) => {
   const dotStyle = {
@@ -147,6 +57,24 @@ const EditPage = () => {
     }
     fetchAllResumes();
   }, []);
+
+  const onDelete = async (resumeId) => {
+    try {
+      const res = await axios.delete(DELETE_RESUME_BY_ID(resumeId))
+      console.log(res)
+      if(res.data.success) {
+        ShowToast(true,res.data.message)
+        setResumesData((prev) =>
+          prev.filter((resume) => resume._id !== resumeId)
+        );
+      }else{
+        ShowToast(false,"Something went wrong")
+      }
+    } catch (error) {
+      console.log(error)
+      ShowToast(false,"Internal server error")
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden pl-22 md:pl-24 lg:pl-28">
@@ -458,6 +386,7 @@ const EditPage = () => {
                           `/dashboard/edit/${resume._id}?title=${resume.title}`
                         )
                       }
+                      onDelete={() => onDelete(resume._id)}
                     />
                   ))
                 : // Skeleton placeholders
