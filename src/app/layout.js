@@ -131,6 +131,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="SnXbtoCp57CB6G4dMwCrBTb3OT5ds-uG3s7pt1EyZk0"
+        />
         {/* WebSite structured data */}
         <Script id="ld-website" type="application/ld+json">
           {JSON.stringify({
