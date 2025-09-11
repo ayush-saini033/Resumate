@@ -1,198 +1,230 @@
 import useResumeStore from "../store/resumeStore";
+import DOMPurify from "dompurify";
 
 const Template20 = () => {
   const { resume } = useResumeStore();
-  const resumeInfo = resume;
+  const resumeInfo = resume || {};
+
+  const safeHTML = (html) => ({
+    __html: DOMPurify.sanitize(html || ""),
+  });
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white font-sans text-black">
+    <div className="max-w-[794px] mx-auto p-10 bg-white font-mono text-black text-sm leading-relaxed tracking-tight">
       {/* Header */}
-      <div className="mb-8 border border-black p-6 rounded-md shadow-sm">
-        <div className="grid grid-cols-3 gap-4 items-center">
-          <div className="text-left">
-            <p className="text-sm font-semibold uppercase tracking-wide">
-              Contact
-            </p>
-            <p className="text-xs">{resumeInfo.phone}</p>
-            <p className="text-xs">{resumeInfo.email}</p>
-          </div>
-          <div className="text-center">
-            <h1 className="text-3xl font-extrabold mb-1 tracking-tight">
-              {resumeInfo.firstName} {resumeInfo.lastName}
-            </h1>
-            <p className="text-lg font-semibold">{resumeInfo.jobTitle}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-sm font-semibold uppercase tracking-wide">
-              Location
-            </p>
-            <p className="text-xs">{resumeInfo.address}</p>
-          </div>
-        </div>
-        <div className="text-center mt-4 text-xs border-t pt-3 space-x-4">
-          {resumeInfo.socialLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline hover:text-blue-800 transition"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      </div>
+      <header className="mb-8 border-b-2 border-black pb-3">
+        <h1 className="text-3xl font-bold uppercase tracking-widest">
+          {resumeInfo.firstName} {resumeInfo.lastName}
+        </h1>
+        <p className="text-base font-semibold">{resumeInfo.jobTitle}</p>
+        <p className="text-sm mt-2">
+          {resumeInfo.address && <span>{resumeInfo.address} | </span>}
+          {resumeInfo.phone && (
+            <span>
+              <a href={`tel:${resumeInfo.phone}`}>{resumeInfo.phone}</a> |{" "}
+            </span>
+          )}
+          {resumeInfo.email && (
+            <a href={`mailto:${resumeInfo.email}`}>{resumeInfo.email}</a>
+          )}
+        </p>
+      </header>
 
       {/* Summary */}
-      <Section title="Professional Summary">
-        <p className="text-sm leading-relaxed text-justify px-4">
-          {resumeInfo.summery}
-        </p>
-      </Section>
+      {resumeInfo.summary && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            PROFESSIONAL SUMMARY
+          </h2>
+          <div
+            className=" prose prose-gray"
+            dangerouslySetInnerHTML={safeHTML(resumeInfo.summary)}
+          />
+        </section>
+      )}
 
-      {/* Skills with Circular Rating */}
-      <Section title="Core Competencies">
-        <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-8 px-4">
-          {resumeInfo.skills.map((skill) => (
-            <CircularSkill key={skill.id} skill={skill} />
-          ))}
-        </div>
-      </Section>
+      {/* Skills */}
+      {resumeInfo.skills?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            SKILLS
+          </h2>
+          <ul className="list-disc pl-5">
+            {resumeInfo.skills.map((skill, i) => (
+              <li key={skill.id || i}>
+                {skill.name}
+                {skill.rating ? ` (${skill.rating}%)` : ""}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Experience */}
-      <Section title="Professional Experience">
-        <div className="px-4 space-y-6">
-          {resumeInfo.experience.map((exp) => (
-            <div key={exp.id} className="border-l-4 border-gray-400 pl-4">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="text-base font-bold">{exp.title}</h3>
-                  <p className="text-sm font-semibold">{exp.companyName}</p>
-                  <p className="text-sm text-gray-600">
-                    {exp.city}, {exp.state}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm bg-gray-100 px-2 py-1 rounded">
-                    {exp.startDate} -{" "}
-                    {exp.currentlyWorking ? "Present" : exp.endDate}
-                  </p>
-                </div>
-              </div>
+      {resumeInfo.experience?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            WORK EXPERIENCE
+          </h2>
+          {resumeInfo.experience.map((exp, i) => (
+            <div key={exp.id || i} className="mb-4">
+              <p className="font-semibold text-sm">
+                {exp.title} | {exp.companyName}
+              </p>
+              <p className="italic text-sm text-gray-700">
+                {exp.startDate} -{" "}
+                {exp.currentlyWorking ? "Present" : exp.endDate}
+              </p>
+              {exp.city || exp.state ? (
+                <p className="text-sm">
+                  {[exp.city, exp.state].filter(Boolean).join(", ")}
+                </p>
+              ) : null}
               <div
-                dangerouslySetInnerHTML={{ __html: exp.workSummery }}
-                className="ml-8 text-sm leading-relaxed text-justify text-gray-800"
+                className="mt-1 prose prose-gray"
+                dangerouslySetInnerHTML={safeHTML(exp.workSummary)}
               />
             </div>
           ))}
-        </div>
-      </Section>
+        </section>
+      )}
 
       {/* Education */}
-      <Section title="Education">
-        <div className="px-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {resumeInfo.education.map((edu) => (
-            <div key={edu.id} className="border border-gray-300 p-4 rounded-md">
-              <h3 className="text-sm font-bold">
-                {edu.degree} in {edu.major}
-              </h3>
-              <p className="text-sm font-semibold">{edu.universityName}</p>
-              <p className="text-xs text-gray-600">
+      {resumeInfo.education?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            EDUCATION
+          </h2>
+          {resumeInfo.education.map((edu, i) => (
+            <div key={edu.id || i} className="mb-4">
+              <p className="font-semibold">
+                {edu.degree}
+                {edu.major ? ` in ${edu.major}` : ""} | {edu.universityName}
+              </p>
+              <p className="italic text-sm">
                 {edu.startDate} - {edu.endDate}
               </p>
-              <p className="text-xs mt-2">{edu.description}</p>
+              <div
+                className="mt-1 prose prose-gray"
+                dangerouslySetInnerHTML={safeHTML(edu.description)}
+              />
             </div>
           ))}
-        </div>
-      </Section>
+        </section>
+      )}
+
+      {/* Certifications */}
+      {resumeInfo.certifications?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            CERTIFICATIONS
+          </h2>
+          <ul className="list-disc pl-5">
+            {resumeInfo.certifications.map((cert, i) => (
+              <li key={cert.id || i}>
+                {cert.name} — {cert.authority} | {cert.issueDate}
+                {cert.expiryDate && ` - ${cert.expiryDate}`}
+                {cert.credentialUrl && (
+                  <>
+                    {" "}
+                    |{" "}
+                    <a
+                      href={cert.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-blue-700"
+                    >
+                      View Certificate
+                    </a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Projects */}
-      <Section title="Key Projects">
-        <div className="px-4 space-y-6">
-          {resumeInfo.projects.map((project, index) => (
-            <div
-              key={index}
-              className="border border-gray-300 p-4 rounded-md text-center"
-            >
-              <h3 className="text-sm font-bold">{project.name}</h3>
-              <p className="text-sm mt-2 text-justify">{project.description}</p>
+      {resumeInfo.projects?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            PROJECTS
+          </h2>
+          {resumeInfo.projects.map((project, i) => (
+            <div key={project.id || i} className="mb-3">
+              <p className="font-semibold">{project.name}</p>
+              <p className="text-sm">{project.description}</p>
               {project.liveUrl && (
-                <p className="text-xs mt-3">
-                  Live Demo:{" "}
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline hover:text-blue-800 transition"
-                  >
-                    Live Demo
-                  </a>
-                </p>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-blue-700 text-sm"
+                >
+                  View Project
+                </a>
               )}
             </div>
           ))}
-        </div>
-      </Section>
-    </div>
-  );
-};
+        </section>
+      )}
 
-const Section = ({ title, children }) => (
-  <section className="mb-12">
-    <h2 className="text-2xl font-bold text-center mb-6 border-b-2 border-gray-800 pb-2 uppercase tracking-wide">
-      {title}
-    </h2>
-    {children}
-  </section>
-);
+      {/* Achievements */}
+      {resumeInfo.achievements?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            ACHIEVEMENTS
+          </h2>
+          {resumeInfo.achievements.map((ach, i) => (
+            <div key={ach.id || i} className="mb-3">
+              <p className="font-semibold">{ach.title}</p>
+              {ach.date && <p className="text-sm">{ach.date}</p>}
+              <div
+                className=" prose prose-gray text-sm"
+                dangerouslySetInnerHTML={safeHTML(ach.description)}
+              />
+            </div>
+          ))}
+        </section>
+      )}
 
-const CircularSkill = ({ skill }) => {
-  const radius = 40; // circle radius
-  const stroke = 6; // circle stroke thickness
-  const normalizedRadius = radius - stroke * 2;
-  const circumference = normalizedRadius * 2 * Math.PI;
+      {/* Languages */}
+      {resumeInfo.languages?.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            LANGUAGES
+          </h2>
+          <ul className="list-disc pl-5">
+            {resumeInfo.languages.map((lang, i) => (
+              <li key={lang.id || i}>
+                {lang.name} {lang.proficiency ? `(${lang.proficiency})` : ""}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-  const strokeDashoffset = circumference - (skill.rating / 100) * circumference;
-
-  return (
-    <div className="flex flex-col items-center text-center w-24">
-      <svg height={radius * 2} width={radius * 2}>
-        <circle
-          stroke="#ddd"
-          fill="transparent"
-          strokeWidth={stroke}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-        />
-        <circle
-          stroke="#2563EB" // blue color for progress
-          fill="transparent"
-          strokeWidth={stroke}
-          strokeDasharray={`${circumference} ${circumference}`}
-          style={{
-            strokeDashoffset,
-            transition: "stroke-dashoffset 0.7s ease",
-          }}
-          strokeLinecap="round"
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-        />
-        <text
-          x="50%"
-          y="50%"
-          dominantBaseline="middle"
-          textAnchor="middle"
-          fontSize="12"
-          fontWeight="bold"
-          fill="#2563EB"
-        >
-          {skill.rating}%
-        </text>
-      </svg>
-      <p className="mt-2 font-semibold text-sm">{skill.name}</p>
+      {/* Preferences */}
+      {resumeInfo.preferences?.jobType && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base border-b border-gray-700 mb-2">
+            JOB PREFERENCES
+          </h2>
+          <p>
+            <strong>Job Type:</strong> {resumeInfo.preferences.jobType}
+          </p>
+          {resumeInfo.preferences.location && (
+            <p>
+              <strong>Preferred Location:</strong>{" "}
+              {resumeInfo.preferences.location}
+            </p>
+          )}
+          <p>
+            <strong>Willing to Relocate:</strong>{" "}
+            {resumeInfo.preferences.relocation ? "Yes" : "No"}
+          </p>
+        </section>
+      )}
     </div>
   );
 };

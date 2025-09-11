@@ -129,7 +129,7 @@ function TermsService() {
                     <FileText className="w-8 h-8 text-blue-500 mr-4" />
                     Service Overview
                   </h2>
-                  <div className="prose prose-invert max-w-none">
+                  <div className="max-w-none">
                     <p className="text-gray-300 text-lg leading-relaxed mb-6">
                       ResumeBuilder Pro provides online resume creation,
                       editing, and formatting services. Our platform helps users

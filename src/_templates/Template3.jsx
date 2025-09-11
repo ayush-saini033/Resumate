@@ -1,163 +1,160 @@
 import useResumeStore from "../store/resumeStore";
+import DOMPurify from "dompurify";
+
 const Template3 = () => {
   const { resume } = useResumeStore();
-  const resumeInfo = resume;
+  const resumeInfo = resume || {};
+
+  const safeHTML = (html) => ({
+    __html: DOMPurify.sanitize(html || ""),
+  });
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white font-mono text-black">
+    <div className="max-w-[794px] mx-auto px-6 py-4 bg-white text-gray-900 font-serif text-sm leading-snug">
       {/* Header */}
-      <div className="text-center mb-10">
-        {/* Name */}
-        <h1 className="text-3xl font-bold mb-1 tracking-wide">
-          {resumeInfo.firstName.toUpperCase()}{" "}
-          {resumeInfo.lastName.toUpperCase()}
+      <header className="text-center border-b pb-3 mb-3">
+        <h1 className="text-xl font-bold">
+          {resumeInfo.firstName} {resumeInfo.lastName}
         </h1>
-
-        {/* Job Title */}
-        <p className="text-base font-semibold text-gray-800 mb-3">
-          {resumeInfo.jobTitle}
+        <p className="italic text-sm">{resumeInfo.jobTitle}</p>
+        <p className="text-xs mt-1">
+          {resumeInfo.address}{" "}
+          {resumeInfo.phone && (
+            <>
+              | <a href={`tel:${resumeInfo.phone}`}>{resumeInfo.phone}</a>
+            </>
+          )}
+          {resumeInfo.email && (
+            <>
+              {" "}
+              | <a href={`mailto:${resumeInfo.email}`}>{resumeInfo.email}</a>
+            </>
+          )}
         </p>
-
-        {/* Contact + Links */}
-        <div className="flex flex-col items-center space-y-1 text-sm text-gray-700">
-          {/* Address */}
-          <p>{resumeInfo.address}</p>
-
-          {/* Phone + Email */}
-          <p>
-            {resumeInfo.phone} |{" "}
-            <a
-              href={`mailto:${resumeInfo.email}`}
-              className="text-blue-700 hover:underline transition-colors duration-200"
-            >
-              {resumeInfo.email}
-            </a>
-          </p>
-
-          {/* Professional Links */}
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-            {resumeInfo.socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-700 hover:underline transition-colors duration-200"
-              >
-                {link.name}
-              </a>
+        {resumeInfo.socialLinks?.length > 0 && (
+          <p className="text-xs mt-1">
+            {resumeInfo.socialLinks.map((link, i) => (
+              <span key={link.id || i}>
+                <a href={link.url} target="_blank" rel="noreferrer">
+                  {link.name}
+                </a>
+                {i < resumeInfo.socialLinks.length - 1 && " • "}
+              </span>
             ))}
-          </div>
-        </div>
-      </div>
+          </p>
+        )}
+      </header>
 
       {/* Summary */}
-      <div className="mb-8">
-        <h2 className="text-sm font-bold mb-1 underline">
-          Summary of Qualification
-        </h2>
-        <div
-          className="prose prose-gray max-w-none text-sm"
-          dangerouslySetInnerHTML={{ __html: resumeInfo.summary }}
-        />
-      </div>
+      {resumeInfo.summary && (
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Professional Summary
+          </h2>
+          <div
+            dangerouslySetInnerHTML={safeHTML(resumeInfo.summary)}
+            className="ml-2 prose prose-gray"
+          />
+        </section>
+      )}
 
-      <hr className="border-gray-300 mb-8" />
-
-      {/* Core Competencies */}
-      <div className="mb-8">
-        <h2 className="text-sm font-bold mb-3 underline">CORE COMPETENCIES</h2>
-        <div className="grid grid-cols-3 gap-3 text-sm">
-          {resumeInfo.skills.map((skill) => (
-            <div key={skill.id} className="flex flex-col gap-1">
-              <span>• {skill.name}</span>
-              <div className="w-full h-2 bg-gray-300 rounded overflow-hidden">
-                <div
-                  className="h-3 rounded bg-gradient-to-r from-blue-600 to-blue-400"
-                  style={{ width: `${skill.rating}%` }}
-                />
+      {/* Skills */}
+      {resumeInfo.skills?.length > 0 && (
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Technical Skills
+          </h2>
+          <div className="grid grid-cols-2 gap-1 ml-2">
+            {resumeInfo.skills.map((skill, idx) => (
+              <div key={skill.id || idx}>
+                {skill.name} {skill.rating ? `(${skill.rating}%)` : ""}
               </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Experience */}
+      {resumeInfo.experience?.length > 0 && (
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Experience
+          </h2>
+          {resumeInfo.experience.map((exp) => (
+            <div key={exp.id || exp.companyName} className="ml-2 mb-2">
+              <div className="flex justify-between">
+                <div>
+                  <p className="font-medium">{exp.companyName}</p>
+                  <p className="italic">{exp.title}</p>
+                </div>
+                <div className="text-right text-xs text-gray-600">
+                  <p>{[exp.city, exp.state].filter(Boolean).join(", ")}</p>
+                  <p>
+                    {exp.startDate} –{" "}
+                    {exp.currentlyWorking ? "Present" : exp.endDate}
+                  </p>
+                </div>
+              </div>
+              <div
+                dangerouslySetInnerHTML={safeHTML(exp.workSummary)}
+                className="ml-3 mt-1 prose prose-gray"
+              />
             </div>
           ))}
-        </div>
-      </div>
-
-      <hr className="border-gray-300 mb-8" />
-
-      {/* Professional Experience */}
-      <div className="mb-8">
-        <h2 className="text-sm font-bold mb-3 underline">
-          PROFESSIONAL EXPERIENCE
-        </h2>
-        {resumeInfo.experience.map((exp) => (
-          <div key={exp.id} className="mb-6">
-            <div className="flex justify-between items-start mb-1">
-              <div>
-                <h3 className="font-bold text-sm">{exp.title}</h3>
-                <p className="text-sm text-gray-700">
-                  {exp.companyName}, {exp.city}, {exp.state}
-                </p>
-              </div>
-              <p className="text-sm text-gray-600">
-                {exp.startDate} -{" "}
-                {exp.currentlyWorking ? "Present" : exp.endDate}
-              </p>
-            </div>
-            <div
-              className="prose prose-gray max-w-none text-sm"
-              dangerouslySetInnerHTML={{ __html: exp.workSummary }}
-            />
-          </div>
-        ))}
-      </div>
-
-      <hr className="border-gray-300 mb-8" />
+        </section>
+      )}
 
       {/* Education */}
-      <div className="mb-8">
-        <h2 className="text-sm font-bold mb-3 underline">EDUCATION</h2>
-        {resumeInfo.education.map((edu) => (
-          <div key={edu.id} className="mb-4">
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="font-bold text-sm">
-                  {edu.degree} in {edu.major}
-                </h3>
-                <p className="text-sm text-gray-700">{edu.universityName}</p>
-                <div
-                  className="prose prose-gray max-w-none text-sm"
-                  dangerouslySetInnerHTML={{ __html: edu.description }}
-                />
+      {resumeInfo.education?.length > 0 && (
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Education
+          </h2>
+          {resumeInfo.education.map((edu) => (
+            <div key={edu.id || edu.universityName} className="ml-2 mb-2">
+              <div className="flex justify-between">
+                <div>
+                  <p className="font-medium">{edu.universityName}</p>
+                  <p className="italic">
+                    {edu.degree}
+                    {edu.major && ` in ${edu.major}`}
+                  </p>
+                </div>
+                <p className="text-xs text-gray-600">
+                  {edu.startDate} – {edu.endDate}
+                </p>
               </div>
-              <p className="text-sm text-gray-600">
-                {edu.startDate} - {edu.endDate}
-              </p>
+              <div
+                dangerouslySetInnerHTML={safeHTML(edu.description)}
+                className="ml-3 mt-1 prose prose-gray"
+              />
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </section>
+      )}
 
-      <hr className="border-gray-300 mb-8" />
-
+      {/* Certifications */}
       {resumeInfo.certifications?.length > 0 && (
-        <section className="mb-10">
-          <h2 className="text-sm font-bold mb-3 underline">CERTIFICATIONS</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Certifications
+          </h2>
+          <div className="grid grid-cols-2 gap-2 ml-2">
             {resumeInfo.certifications.map((cert) => (
-              <div key={cert.id}>
-                <h3 className="font-semibold text-base">{cert.name}</h3>
-                <p className="text-sm text-gray-600">
-                  {cert.authority} | {cert.issueDate}{" "}
-                  {cert.expiryDate && `- ${cert.expiryDate}`}
+              <div key={cert.id || cert.name}>
+                <p className="font-medium">{cert.name}</p>
+                <p className="text-xs text-gray-600">
+                  {cert.authority} | {cert.issueDate}
+                  {cert.expiryDate && ` – ${cert.expiryDate}`}
                 </p>
                 {cert.credentialUrl && (
                   <a
                     href={cert.credentialUrl}
+                    className="text-xs text-blue-600 underline"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline text-sm"
+                    rel="noreferrer"
                   >
-                    View Certificate
+                    View
                   </a>
                 )}
               </div>
@@ -166,82 +163,86 @@ const Template3 = () => {
         </section>
       )}
 
-      <hr className="border-gray-300 mb-8" />
-
       {/* Projects */}
-      <div>
-        <h2 className="text-sm font-bold mb-3 underline">
-          Highlighted Projects
-        </h2>
-        {resumeInfo.projects.map((project, index) => (
-          <div key={index} className="mb-4">
-            <h3 className="font-bold text-sm">{project.name}</h3>
-            <p className="text-sm text-gray-800 mb-1">{project.description}</p>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-700 hover:underline text-sm font-medium transition-colors duration-200"
-              >
-                View Project
-              </a>
-            )}
-          </div>
-        ))}
-      </div>
-      <hr className="border-gray-300 mb-8" />
+      {resumeInfo.projects?.length > 0 && (
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Projects
+          </h2>
+          {resumeInfo.projects.map((proj, idx) => (
+            <div key={proj.id || idx} className="ml-2 mb-2">
+              <p className="font-medium">{proj.name}</p>
+              <p className="italic text-xs">{proj.description}</p>
+              {proj.liveUrl && (
+                <a
+                  href={proj.liveUrl}
+                  className="text-xs text-blue-600 underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Live Demo
+                </a>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* Achievements */}
       {resumeInfo.achievements?.length > 0 && (
-        <section className="mb-10">
-          <h2 className="text-sm font-bold mb-3 underline">ACHIEVEMENTS</h2>
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Achievements
+          </h2>
           {resumeInfo.achievements.map((ach) => (
-            <div key={ach.id} className="mb-4">
-              <h3 className="font-semibold text-sm">{ach.title}</h3>
-              <p className="text-xs text-gray-600">{ach.date}</p>
+            <div key={ach.id || ach.title} className="ml-2 mb-2">
+              <div className="flex justify-between">
+                <p className="font-medium">{ach.title}</p>
+                <p className="text-xs text-gray-600">{ach.date}</p>
+              </div>
               <div
-                className="prose prose-gray max-w-none text-sm"
-                dangerouslySetInnerHTML={{ __html: ach.description }}
+                className="prose prose-gray italic text-sm ml-3"
+                dangerouslySetInnerHTML={safeHTML(ach.description)}
               />
             </div>
           ))}
         </section>
       )}
 
-      <hr className="border-gray-300 my-8" />
       {/* Languages */}
       {resumeInfo.languages?.length > 0 && (
-        <section className="mb-10">
-          <h2 className="text-sm font-bold mb-3 underline">LANGUAGES</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+        <section className="mb-3">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Languages
+          </h2>
+          <div className="grid grid-cols-2 ml-2 gap-y-1 text-sm">
             {resumeInfo.languages.map((lang, i) => (
-              <div key={i} className="flex items-center">
-                <span className="font-medium">{lang.name}</span>
-                <span className="ml-2 text-gray-600 italic text-xs">
-                  ({lang.proficiency})
-                </span>
+              <div key={lang.id || i}>
+                {lang.name} {lang.proficiency && `(${lang.proficiency})`}
               </div>
             ))}
           </div>
         </section>
       )}
-      <hr className="border-gray-300 my-8" />
 
       {/* Preferences */}
-      {resumeInfo.preferences.jobType.length > 0 && (
-        <section className="mb-6">
-          <h2 className="text-sm font-bold mb-3 underline">JOB PREFERENCES</h2>
-          <p className="text-sm">
-            <span className="font-semibold">Job Type:</span>{" "}
-            {resumeInfo.preferences.jobType}
-          </p>
-          <p className="text-sm">
-            <span className="font-semibold">Preferred Location:</span>{" "}
-            {resumeInfo.preferences.location}
-          </p>
-          <p className="text-sm">
-            <span className="font-semibold">Willing to Relocate:</span>{" "}
-            {resumeInfo.preferences.relocation ? "Yes" : "No"}
-          </p>
+      {resumeInfo.preferences?.jobType && (
+        <section className="mb-2">
+          <h2 className="font-semibold text-base border-b pb-1 mb-1">
+            Job Preferences
+          </h2>
+          <div className="ml-2 text-sm space-y-1">
+            <p>
+              <strong>Job Type:</strong> {resumeInfo.preferences.jobType}
+            </p>
+            <p>
+              <strong>Location:</strong> {resumeInfo.preferences.location}
+            </p>
+            <p>
+              <strong>Relocation:</strong>{" "}
+              {resumeInfo.preferences.relocation ? "Yes" : "No"}
+            </p>
+          </div>
         </section>
       )}
     </div>

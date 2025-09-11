@@ -8,7 +8,7 @@ const testimonials = [
     avatar:
       "https://media.licdn.com/dms/image/v2/D5603AQFgZO0p5iBbPg/profile-displayphoto-shrink_200_200/B56ZPkTFXSG4AY-/0/1734702029826?e=1759363200&v=beta&t=vSKCSc_rzrzopndE4eGXWThDgPi_1a69QkH3cPnwRzw",
     content:
-      "This resume builder is incredible! I landed my dream job at Google within 2 weeks of using it. The AI suggestions were spot on.",
+      "This resume builder is incredible! The AI tailored my resume perfectly for tech roles. I landed a great position in just two weeks.",
     rating: 5,
   },
   {
@@ -17,17 +17,44 @@ const testimonials = [
     avatar:
       "https://media.licdn.com/dms/image/v2/D4E03AQE39EkCWSZj5Q/profile-displayphoto-shrink_200_200/B4EZRllWAhHMAY-/0/1736871078034?e=1759363200&v=beta&t=23VtaVFXP6m-ZEJyvc-4KOYeUk8ZuPe68Xh0GwO5JEc",
     content:
-      "The templates are stunning and professional. I received more interview calls than ever before. Highly recommend!",
+      "The templates are clean and professional. I saw a noticeable increase in interview callbacks after updating my resume.",
     rating: 5,
   },
   {
     name: "Vikas Babu",
     position: "Software Engineer",
     avatar:
-      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1757149200&v=beta&t=OwhlW4OG6Y5LIKO_MDlg2BAERSiqKrm3mb5r1vXzSoU",
+      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
     content:
-      "Simple, elegant, and effective. The mobile editor saved me so much time. Perfect for busy professionals.",
+      "Loved how quick and intuitive it was. The AI suggestions made my resume more impactful — and it looks great too.",
     rating: 5,
+  },
+  {
+    name: "Krishn Kant",
+    position: "Civil Engineer",
+    avatar:
+      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
+    content:
+      "Creating a polished resume took me less than 10 minutes. It's a great tool for engineers like me who don’t want to start from scratch.",
+    rating: 4.7,
+  },
+  {
+    name: "Aditya Sushil Sahu",
+    position: "AI ML Engineer",
+    avatar:
+      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
+    content:
+      "Impressed with how well it highlights AI and ML skills. The customization options and export features are fantastic.",
+    rating: 5,
+  },
+  {
+    name: "Anil Raj Meena",
+    position: "Civil Engineer",
+    avatar:
+      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
+    content:
+      "Simple, fast, and beautifully designed. My resume finally stands out, and I can easily update it anytime from my phone.",
+    rating: 4.3,
   },
 ];
 
@@ -67,12 +94,31 @@ const Testimonials = () => {
 
               {/* Rating */}
               <div className="flex space-x-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-5 h-5 text-yellow-400 fill-current"
-                  />
-                ))}
+                {[1, 2, 3, 4, 5].map((starIndex) => {
+                  const ratingValue = testimonial.rating;
+
+                  let starType = "empty"; // default
+
+                  if (ratingValue >= starIndex) {
+                    starType = "full";
+                  } else if (ratingValue >= starIndex - 0.5) {
+                    starType = "half";
+                  }
+
+                  return (
+                    <span key={starIndex}>
+                      {starType === "full" && (
+                        <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                      )}
+                      {starType === "half" && (
+                        <Star className="w-5 h-5 text-yellow-400 fill-current opacity-50" />
+                      )}
+                      {starType === "empty" && (
+                        <Star className="w-5 h-5 text-gray-300" />
+                      )}
+                    </span>
+                  );
+                })}
               </div>
 
               {/* Content */}

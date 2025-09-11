@@ -56,9 +56,7 @@ const features = [
 const Features = () => {
   return (
     <section id="features" className="relative py-24 bg-black overflow-hidden">
-      {/* Background Glows */}
-      <div className="absolute top-0 -left-40 w-[32rem] h-[32rem] bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 -right-40 w-[28rem] h-[28rem] bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-700"></div>
+     
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}

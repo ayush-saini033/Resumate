@@ -22,7 +22,7 @@ const Header = () => {
               <FileText className="w-6 h-6 text-white" />
             </div>
             <span className={`text-4xl font-extrabold text-white tracking-wide group-hover:text-blue-400 transition-colors ${macondo.className} cursor-pointer`}>
-              Resumate
+              Resumova
             </span>
           </div>
 

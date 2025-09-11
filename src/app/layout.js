@@ -1,20 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { PT_Sans  } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 
 export const metadata = {
-  metadataBase: new URL("https://resumate-henna.vercel.app"),
+  metadataBase: new URL("https://resumova.vercel.app"),
 
   // 🔹 Titles
   title: {
-    default: "Resumate – Build a Job-Winning Resume Fast",
-    template: "%s | Resumate",
+    default: "Resumova – Free AI Resume Builder for Job Seekers",
+    template: "%s | Resumova",
   },
 
-  // 🔹 Description for SEO + social
   description:
-    "Create, edit, and download professional resumes instantly. ATS-friendly templates that help you get noticed.",
+    "Build a professional, ATS-optimized resume in minutes with Resumova – the free AI resume builder for students, freshers, and experienced professionals. Choose from modern templates and download instantly.",
 
   // 🔹 Keywords (SEO)
   keywords: [
@@ -30,6 +29,39 @@ export const metadata = {
     "professional resume builder",
     "resume builder online free",
     "resume maker app",
+    "Resumov resume builder",
+    "Resumov AI resume generator",
+    "Resumov cv maker online",
+    "Resumov AI tools for job seekers",
+    "Resumov professional resume builder",
+    "Resumov free resume templates",
+
+    "AI resume builder 2025",
+    "chatgpt resume builder",
+    "resume builder with chatgpt",
+    "free resume builder no signup",
+    "create resume in 5 minutes",
+    "best resume builder for freshers 2025",
+    "AI generated resumes for tech jobs",
+
+    "resume builder for software engineers",
+    "resume maker for designers",
+    "resume builder for marketing jobs",
+    "AI resume for remote jobs",
+    "remote job resume builder",
+
+    "international resume builder",
+    "EU format CV generator",
+    "resume builder for Canada jobs",
+    "UK CV maker online",
+    "India resume builder app",
+    "USA style resume templates",
+
+    "build a job-ready resume with AI",
+    "download resume with one click",
+    "get hired faster with Resumov",
+    "how to pass ATS with AI resume",
+    "AI optimized resume for job portals",
 
     // AI & Modern Resume Keywords
     "AI resume builder",
@@ -60,14 +92,14 @@ export const metadata = {
 
   // 🔹 Canonical URL (SEO best practice)
   alternates: {
-    canonical: "https://resumate-henna.vercel.app",
+    canonical: "https://resumova.vercel.app",
   },
 
   // 🔹 Open Graph (Facebook, LinkedIn, WhatsApp, Slack, Telegram, Discord, Reddit)
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://resumate-henna.vercel.app",
+    url: "https://resumova.vercel.app",
     siteName: "Resumate",
     title: "Resumate – Resume Builder",
     description: "Create professional resumes with ATS-friendly templates.",
@@ -117,14 +149,11 @@ export const metadata = {
   },
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = PT_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-inter",
+  display: "swap", // good for performance
 });
 
 export default function RootLayout({ children }) {
@@ -140,20 +169,17 @@ export default function RootLayout({ children }) {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            name: "Resumate",
-            url: "https://resumate-henna.vercel.app",
+            name: "Resumova",
+            url: "https://resumova.vercel.app/",
             potentialAction: {
               "@type": "SearchAction",
-              target:
-                "https://resumate-henna.vercel.app/?q={search_term_string}",
+              target: "https://resumova.vercel.app/?q={search_term_string}",
               "query-input": "required name=search_term_string",
             },
           })}
         </Script>
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white bg-black`}
-      >
+      <body className={`${inter.variable} antialiased text-white bg-black`}>
         {children}
         <Toaster
           position="top-right"

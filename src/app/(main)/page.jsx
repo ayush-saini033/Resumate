@@ -9,6 +9,17 @@ import Hero from "../../home/components/hero";
 import Testimonials from "../../home/components/testimonial";
 import TermsService from "../../home/components/terms-service";
 import { ChevronUp } from "lucide-react";
+import { PT_Sans } from "next/font/google";
+import PricingCards from "@/home/components/pricing";
+import TemplateStack from "@/home/components/templateStack"
+const pt_sans = PT_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-inter",
+  display: "swap", // good for performance
+});
+
+
 const HomePage = () => {
 
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -26,7 +37,7 @@ const HomePage = () => {
   },[])
 
   return (
-    <div className="flex flex-col min-h-screen bg-black">
+    <div className={`flex flex-col min-h-screen bg-black ${pt_sans.className}`}>
       {/* Header (sticky on top) */}
       <Header />
 
@@ -34,9 +45,11 @@ const HomePage = () => {
       <main className="flex-1">
         <Hero />
         <Features />
+        <TemplateStack/>
         <Testimonials />
-        <TermsService />
+        <PricingCards/>
         <CTA />
+        <TermsService />
       </main>
 
       {/* Footer */}

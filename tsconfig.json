@@ -29,6 +29,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/test/page.jsx"
-  ],
+, "src/home/components/pricing.jsx"  ],
   "exclude": ["node_modules"]
 }

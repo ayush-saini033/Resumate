@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import useResumeStore from "@/store/resumeStore";
 import { fakeData1 } from "../../../../lib/fakeData";
+import "./html.css";
 
 const TemplateForViews = [
   { name: "Template1", displayName: "Modern Layout" },
@@ -15,6 +16,7 @@ const TemplateForViews = [
   { name: "Template8", displayName: "Dashboard" },
   { name: "Template9", displayName: "Magazine Style" },
   { name: "Template10", displayName: "Photography" },
+  { name: "Template11", displayName: "Clubs Pro" },
   { name: "Template12", displayName: "Business Pro" },
   { name: "Template13", displayName: "Tech Startup" },
   { name: "Template14", displayName: "Agency" },

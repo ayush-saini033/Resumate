@@ -4,7 +4,9 @@ import React from "react";
 const MainLayoutPage = ({ children }) => {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-      {children}
+      <div className={`antialiased text-white bg-black`}>
+        {children}
+      </div>
     </GoogleOAuthProvider>
   );
 };

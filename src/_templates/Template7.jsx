@@ -1,248 +1,251 @@
 import useResumeStore from "../store/resumeStore";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  ExternalLink,
-  Award,
-  Briefcase,
-  GraduationCap,
-  Code,
-  User,
-} from "lucide-react";
+import DOMPurify from "dompurify";
 
 const Template7 = () => {
   const { resume } = useResumeStore();
-  const resumeInfo = resume;
+  const resumeInfo = resume || {};
+
+  const safeHTML = (html) => ({
+    __html: DOMPurify.sanitize(html || ""),
+  });
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white font-sans text-black shadow-lg border border-gray-200">
-      {/* Header Section */}
-      <header className="text-center mb-10 pb-8 border-b-2 border-gray-800">
-        <div className="relative">
-          <h1 className="text-4xl font-bold mb-3 tracking-wide text-gray-900">
-            {resumeInfo.firstName} {resumeInfo.lastName}
-          </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto mb-4 rounded-full"></div>
-          <p className="text-xl font-semibold mb-6 text-blue-700 uppercase tracking-widest">
-            {resumeInfo.jobTitle}
-          </p>
-
-          {/* Contact Information with Icons */}
-          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-blue-600" />
-              <span>{resumeInfo.email}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-blue-600" />
-              <span>{resumeInfo.phone}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-blue-600" />
-              <span>{resumeInfo.address}</span>
-            </div>
-            {resumeInfo.socialLinks.map((link, index) => (
-              <div key={link.id || index} className="flex items-center gap-2">
-                <ExternalLink className="w-4 h-4 text-blue-600" />
+    <div className="max-w-[794px] mx-auto p-6 bg-white text-gray-900 font-sans text-sm leading-relaxed">
+      {/* HEADER */}
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold">
+          {resumeInfo.firstName} {resumeInfo.lastName}
+        </h1>
+        <p className="italic text-sm mt-1">{resumeInfo.jobTitle}</p>
+        <p className="text-xs text-gray-700 mt-2">
+          {resumeInfo.address}
+          {resumeInfo.phone && (
+            <>
+              {" "}
+              •{" "}
+              <a href={`tel:${resumeInfo.phone}`} className="underline">
+                {resumeInfo.phone}
+              </a>
+            </>
+          )}
+          {resumeInfo.email && (
+            <>
+              {" "}
+              •{" "}
+              <a href={`mailto:${resumeInfo.email}`} className="underline">
+                {resumeInfo.email}
+              </a>
+            </>
+          )}
+        </p>
+        {resumeInfo.socialLinks?.length > 0 && (
+          <p className="text-xs text-gray-700 mt-1">
+            {resumeInfo.socialLinks.map((link, i) => (
+              <span key={link.id || i}>
                 <a
                   href={link.url}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                  rel="noreferrer"
+                  className="underline"
                 >
-                  {link.name || link.url}
+                  {link.name}
                 </a>
-              </div>
+                {i < resumeInfo.socialLinks.length - 1 && <> • </>}
+              </span>
             ))}
-          </div>
-        </div>
+          </p>
+        )}
       </header>
 
-      {/* Professional Summary */}
-      {resumeInfo.summery && (
-        <section className="mb-10">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-l-4 border-blue-600 rounded-r-lg shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <User className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">
-                Professional Summary
-              </h2>
+      {/* PROFESSIONAL SUMMARY */}
+      {resumeInfo.summary && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Professional Summary</h2>
+          <div
+            className="mt-1  prose prose-gray"
+            dangerouslySetInnerHTML={safeHTML(resumeInfo.summary)}
+          />
+        </section>
+      )}
+
+      {/* SKILLS */}
+      {resumeInfo.skills?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Skills</h2>
+          <div
+            className={`grid gap-x-4 gap-y-2 mt-1 ${
+              resumeInfo.skills.length >= 12 ? "grid-cols-4" : "grid-cols-3"
+            }`}
+          >
+            {resumeInfo.skills.map((skill, idx) => (
+              <div
+                key={skill.id || idx}
+                className="flex justify-between items-center"
+              >
+                <span>{skill.name}</span>
+                {typeof skill.rating === "number" && skill.rating > 0 && (
+                  <span className="text-xs text-gray-600">
+                    ({skill.rating}%)
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* PROFESSIONAL EXPERIENCE */}
+      {resumeInfo.experience?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Work Experience</h2>
+          {resumeInfo.experience.map((exp) => (
+            <div key={exp.id || exp.companyName} className="mt-3">
+              <p className="font-medium">
+                {exp.title} — {exp.companyName}
+              </p>
+              <p className="text-xs text-gray-700">
+                {[exp.city, exp.state].filter(Boolean).join(", ")} •{" "}
+                {exp.startDate} –{" "}
+                {exp.currentlyWorking ? "Present" : exp.endDate}
+              </p>
+              <div
+                className="mt-1 text-sm prose prose-gray"
+                dangerouslySetInnerHTML={safeHTML(exp.workSummary)}
+              />
             </div>
-            <p className="text-gray-700 leading-relaxed text-justify">
-              {resumeInfo.summery}
-            </p>
-          </div>
+          ))}
         </section>
       )}
 
-      {/* Core Qualifications */}
-      {resumeInfo.skills && resumeInfo.skills.length > 0 && (
-        <section className="mb-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <Code className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">
-              Core Qualifications
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {resumeInfo.skills.map((skill) => (
+      {/* EDUCATION */}
+      {resumeInfo.education?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Education</h2>
+          {resumeInfo.education.map((edu) => (
+            <div key={edu.id || edu.universityName} className="mt-3">
+              <p className="font-medium">{edu.universityName}</p>
+              <p className="text-xs text-gray-700">
+                {edu.degree}
+                {edu.major ? ` in ${edu.major}` : ""} • {edu.startDate} –{" "}
+                {edu.endDate}
+              </p>
               <div
-                key={skill.id}
-                className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center hover:bg-blue-50 hover:border-blue-300 transition-all duration-200"
-              >
-                <span className="text-sm font-medium text-gray-800">
-                  {skill.name}
-                </span>
-                <div className="mt-2">
-                  <div className="w-full bg-gray-200 rounded-full h-1.5">
-                    <div
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
-                      style={{ width: `${skill.rating}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1 block">
-                    {skill.rating}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+                className="mt-1 prose prose-gray text-sm"
+                dangerouslySetInnerHTML={safeHTML(edu.description)}
+              />
+            </div>
+          ))}
         </section>
       )}
 
-      {/* Professional Experience */}
-      {resumeInfo.experience && resumeInfo.experience.length > 0 && (
-        <section className="mb-10">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Briefcase className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">
-              Professional Experience
-            </h2>
-          </div>
-          <div className="space-y-8">
-            {resumeInfo.experience.map((exp) => (
-              <div
-                key={exp.id}
-                className="relative pl-8 pb-8 border-l-2 border-blue-200 last:border-l-0 last:pb-0"
-              >
-                {/* Timeline dot */}
-                <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-sm"></div>
-
-                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">
-                        {exp.title}
-                      </h3>
-                      <p className="text-lg font-semibold text-blue-600 mb-2">
-                        {exp.companyName}
-                      </p>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <MapPin className="w-3 h-3" />
-                        <span>
-                          {exp.city}, {exp.state}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-md mt-3 lg:mt-0 lg:ml-4">
-                      <Calendar className="w-3 h-3" />
-                      <span>
-                        {exp.startDate} -{" "}
-                        {exp.currentlyWorking ? "Present" : exp.endDate}
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    className="text-gray-700 leading-relaxed text-sm pl-4 border-l-2 border-gray-100"
-                    dangerouslySetInnerHTML={{ __html: exp.workSummery }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Education & Credentials */}
-      {resumeInfo.education && resumeInfo.education.length > 0 && (
-        <section className="mb-10">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <GraduationCap className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">
-              Education & Credentials
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {resumeInfo.education.map((edu) => (
-              <div
-                key={edu.id}
-                className="bg-gradient-to-br from-gray-50 to-blue-50 border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200"
-              >
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {edu.degree}
-                </h3>
-                <p className="text-base font-semibold text-blue-600 mb-1">
-                  {edu.major}
-                </p>
-                <p className="text-sm font-medium text-gray-700 mb-3">
-                  {edu.universityName}
-                </p>
-                <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-                  <Calendar className="w-3 h-3" />
-                  <span>
-                    {edu.startDate} - {edu.endDate}
-                  </span>
-                </div>
-                {edu.description && (
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    {edu.description}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Notable Projects */}
-      {resumeInfo.projects && resumeInfo.projects.length > 0 && (
-        <section>
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Award className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">
-              Notable Projects
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {resumeInfo.projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:border-blue-300"
-              >
-                <h3 className="text-lg font-bold text-gray-900 mb-3">
-                  {project.name}
-                </h3>
-                <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                {project.liveUrl && (
-                  <div className="flex items-center gap-2">
-                    <ExternalLink className="w-4 h-4 text-blue-600" />
+      {/* CERTIFICATIONS */}
+      {resumeInfo.certifications?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Certifications</h2>
+          <ul className="list-disc list-inside mt-1 text-sm">
+            {resumeInfo.certifications.map((cert) => (
+              <li key={cert.id || cert.name} className="mt-1">
+                <span className="font-medium">{cert.name}</span> —{" "}
+                {cert.authority} ({cert.issueDate}
+                {cert.expiryDate ? ` – ${cert.expiryDate}` : ""})
+                {cert.credentialUrl && (
+                  <>
+                    {" "}
+                    •{" "}
                     <a
-                      href={project.liveUrl}
+                      href={cert.credentialUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors"
+                      rel="noreferrer"
+                      className="underline"
                     >
-                      View Project
+                      View
                     </a>
-                  </div>
+                  </>
                 )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* PROJECTS */}
+      {resumeInfo.projects?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Projects</h2>
+          <ul className="mt-1 text-sm space-y-2">
+            {resumeInfo.projects.map((proj, i) => (
+              <li key={proj.id || i}>
+                <span className="font-medium">{proj.name}</span> —{" "}
+                <span className="italic">{proj.description}</span>
+                {proj.liveUrl && (
+                  <>
+                    {" "}
+                    •{" "}
+                    <a
+                      href={proj.liveUrl}
+                      className="underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Live Link
+                    </a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ACHIEVEMENTS */}
+      {resumeInfo.achievements?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Achievements</h2>
+          <ul className="list-disc list-inside mt-1 text-sm space-y-1">
+            {resumeInfo.achievements.map((ach) => (
+              <li key={ach.id || ach.title}>
+                <span className="font-medium">{ach.title}</span> —{" "}
+                <span className="text-xs text-gray-700">{ach.date}</span>
+                <div
+                  className="mt-1 ml-4 prose prose-gray text-sm"
+                  dangerouslySetInnerHTML={safeHTML(ach.description)}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* LANGUAGES */}
+      {resumeInfo.languages?.length > 0 && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Languages</h2>
+          <div className="grid grid-cols-3 gap-x-4 mt-1 text-sm">
+            {resumeInfo.languages.map((lang, i) => (
+              <div key={lang.id || i}>
+                {lang.name}
+                {lang.proficiency && ` (${lang.proficiency})`}
               </div>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* JOB PREFERENCES */}
+      {resumeInfo.preferences?.jobType && (
+        <section className="mb-5">
+          <h2 className="font-semibold uppercase">Job Preferences</h2>
+          <p className="mt-1 text-sm">
+            <strong>Job Type:</strong> {resumeInfo.preferences.jobType}
+          </p>
+          <p className="mt-1 text-sm">
+            <strong>Preferred Location:</strong>{" "}
+            {resumeInfo.preferences.location || "N/A"}
+          </p>
+          <p className="mt-1 text-sm">
+            <strong>Relocation:</strong>{" "}
+            {resumeInfo.preferences.relocation ? "Yes" : "No"}
+          </p>
         </section>
       )}
     </div>
