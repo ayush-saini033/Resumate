@@ -4,64 +4,64 @@ import { Check, Star, Zap, Crown } from 'lucide-react';
 const pricingTiers = [
   {
     name: "Free",
-    price: "$0",
-    period: "/month",
-    description: "Ideal for job seekers getting started",
+    price: "₹0",
+    period: "", // No period for one-time plans
+    description: "Get started with essential resume features",
     features: [
       "Create up to 3 resumes",
+      "Live URL for each resume",
       "Access 5 templates",
-      "AI resume suggestions",
+      "Basic AI resume suggestions",
       "Download as PDF",
       "Basic ATS optimization",
-      "Limited cover letter support",
       "Community support",
     ],
     icon: <Star className="w-6 h-6" />,
-    buttonText: "Build for Free",
+    buttonText: "Start for Free",
   },
   {
     name: "Pro",
-    price: "$9",
-    period: "/month",
-    description: "Perfect for students & professionals",
+    price: "₹49",
+    period: "",
+    description: "Ideal for students and frequent job seekers",
     features: [
-      "Unlimited resumes",
-      "Access 15 templates",
-      "AI-powered resume and cover letter builder",
+      "Create up to 6 resumes",
+      "Live URL for each resume",
+      "Access 10 templates",
+      "Enhanced AI suggestions for resume & cover letter",
       "Advanced ATS optimization",
-      "Version history & tracking",
-      "Export in PDF, DOCX",
+      "Export as PDF & DOCX",
       "Email support",
     ],
     popular: true,
     icon: <Zap className="w-6 h-6" />,
-    buttonText: "Upgrade to Pro",
+    buttonText: "Upgrade for ₹49",
   },
   {
     name: "Premium",
-    price: "$19",
-    period: "/month",
-    description: "For job seekers who want it all",
+    price: "₹99",
+    period: "",
+    description: "Best for professionals aiming to stand out",
     features: [
-      "Everything in Pro",
+      "Create up to 12 resumes",
+      "Live URL for each resume",
       "Access all 20 templates",
-      "AI cover letter + custom job targeting",
-      "Resume feedback & AI scoring",
-      "Priority customer support",
+      "Advanced AI for resume, cover letter & job targeting",
+      "AI resume scoring & feedback",
       "Multi-language resumes",
-      "Team account access",
+      "Priority customer support",
       "Early access to new features",
     ],
     premium: true,
     icon: <Crown className="w-6 h-6" />,
-    buttonText: "Go Premium",
+    buttonText: "Go Premium for ₹99",
   },
 ];
 
 
 export default function PricingCards() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20 px-4">
+    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -81,10 +81,10 @@ export default function PricingCards() {
               className={`
                 relative rounded-3xl p-8 transition-all duration-300 hover:scale-105 group
                 ${tier.popular 
-                  ? 'bg-gradient-to-b from-blue-900/50 to-gray-900/50 border-2 border-blue-500 shadow-2xl shadow-blue-500/20' 
+                  ? 'bg-gradient-to-b from-blue-900/50 to-gray-900/50 shadow-2xl shadow-blue-500/20' 
                   : tier.premium
-                  ? 'bg-gradient-to-b from-purple-900/30 to-gray-900/50 border-2 border-purple-500/50 shadow-xl shadow-purple-500/10'
-                  : 'bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-gray-600'
+                  ? 'bg-gradient-to-b from-purple-900/30 to-gray-900/50 shadow-xl shadow-purple-500/10'
+                  : 'bg-gradient-to-b from-gray-800/50 to-gray-900/50  hover:border-gray-600'
                 }
                 backdrop-blur-sm
               `}

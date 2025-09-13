@@ -33,10 +33,10 @@ const testimonials = [
     name: "Krishn Kant",
     position: "Civil Engineer",
     avatar:
-      "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
+      "https://images.pexels.com/photos/33873495/pexels-photo-33873495.jpeg",
     content:
       "Creating a polished resume took me less than 10 minutes. It's a great tool for engineers like me who don’t want to start from scratch.",
-    rating: 4.7,
+    rating: 4.3,
   },
   {
     name: "Aditya Sushil Sahu",
@@ -48,13 +48,13 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Anil Raj Meena",
+    name: "Ayush Verma",
     position: "Civil Engineer",
     avatar:
       "https://media.licdn.com/dms/image/v2/D5635AQFeDVKA_5l_pA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1729191216649?e=1758135600&v=beta&t=mNI4VMTCzTkRtKJ3aNAr-fcFUzIoV70UdUIok5EdpmQ",
     content:
       "Simple, fast, and beautifully designed. My resume finally stands out, and I can easily update it anytime from my phone.",
-    rating: 4.3,
+    rating: 4.9,
   },
 ];
 

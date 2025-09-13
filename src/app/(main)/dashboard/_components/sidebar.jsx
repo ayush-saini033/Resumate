@@ -65,10 +65,10 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0"
               } overflow-hidden whitespace-nowrap`}
             >
-              Resumate
+              Resumova
             </span>
           </div>
-          <button className="absolute top-18 border-2 border-blue-500/40 h-8 w-8 -right-3 transform -translate-y-1/2 rounded-full p-1 bg-black/60 backdrop-blur-md transition-all duration-300 flex items-center justify-center shadow-md shadow-blue-900/50">
+          <button onClick={() => setIsExpanded((prev) => !prev)} className="absolute top-18 border-2 border-blue-500/40 h-8 w-8 -right-3 transform -translate-y-1/2 rounded-full p-1 bg-black/60 backdrop-blur-md transition-all duration-300 flex items-center justify-center shadow-md shadow-blue-900/50">
             {isExpanded ? (
               <ChevronLeft size={18} className="text-blue-400" />
             ) : (
@@ -124,7 +124,10 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
             return (
               <li key={index}>
                 <button
-                  onClick={() => setActiveTab(item.tab)}
+                  onClick={() => {
+                    setActiveTab(item.tab);
+                    router.push(`/dashboard/${item.tab}`);
+                  }}
                   className={`flex items-center cursor-pointer space-x-3 px-3 py-3 rounded-l-lg w-full text-left focus:outline-none transition-all ${
                     isActive
                       ? "bg-gradient-to-r from-blue-600/30 to-blue-400/20 border-l-4 border-blue-400 text-blue-300"

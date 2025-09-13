@@ -13,13 +13,7 @@ const ResumeCard = ({
   return (
     <div className="relative group">
       {/* Card Container */}
-      <div className="w-80 h-56 relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-900/30 via-slate-900/50 to-blue-800/40 backdrop-blur-2xl border border-blue-400/20 shadow-2xl hover:shadow-blue-400/30 transition-all duration-500 hover:scale-105">
-        {/* Background Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 via-transparent to-blue-700/20 pointer-events-none"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(59,130,246,0.2),transparent_50%)] pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,rgba(37,99,235,0.15),transparent_50%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 pointer-events-none"></div>
-
+      <div className="w-80 h-56 relative overflow-hidden bg-gray-900/50 border border-gray-800 rounded-xl p-6 backdrop-blur-sm hover:border-blue-500/30 transition-all">
         {/* Content */}
         <div className="relative h-full flex flex-col justify-between p-6 z-10">
           {/* Header Section */}
@@ -79,9 +73,6 @@ const ResumeCard = ({
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/0 via-transparent to-blue-600/0 opacity-0 group-hover:opacity-100 group-hover:from-blue-400/15 group-hover:to-blue-600/15 pointer-events-none transition-all duration-500"></div>
         <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent rounded-t-3xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500"></div>
       </div>
-
-      {/* External Glow */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/20 to-blue-700/20 blur-xl opacity-0 group-hover:opacity-50 pointer-events-none transition-opacity duration-500 -z-10"></div>
     </div>
   );
 };

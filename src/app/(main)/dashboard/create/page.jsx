@@ -388,7 +388,7 @@ const CreateResumePage = () => {
         ))}
       </div>
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 ml-24">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Hero Section */}
           <div className="lg:col-span-2">

@@ -77,14 +77,22 @@ const TemplateStack = () => {
   const TemplateComponent = templates[currentIndex];
 
 const Loading = () => (
-  <div className="absolute top-0 left-0 right-0 bottom-0 flex items-start justify-center">
+  <div className="relative w-full max-w-[794px] mx-auto">
     {/* Desktop/Tablet loader - hidden on mobile */}
-    <div className="hidden sm:flex transform origin-top scale-[0.7] bg-white rounded-md shadow-lg w-full h-full items-center justify-center">
+    <div
+      className="hidden sm:flex aspect-[794/1123] items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white backdrop-blur-md shadow-xl"
+      role="status"
+      aria-label="Loading content"
+    >
       <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
     </div>
 
     {/* Mobile loader - visible only on mobile */}
-    <div className="flex sm:hidden bg-white rounded-md shadow-lg w-full max-w-[100vw] h-[calc(100vh-120px)] items-center justify-center">
+    <div
+      className="flex sm:hidden bg-white rounded-md shadow-lg w-full max-w-[100vw] h-[calc(100vh-120px)] items-center justify-center"
+      role="status"
+      aria-label="Loading content"
+    >
       <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
     </div>
   </div>
@@ -92,7 +100,7 @@ const Loading = () => (
 
 
   return (
-    <div className="min-h-screen w-full px-4 py-8 bg-gradient-to-br from-black to-gray-900/10 flex flex-col items-center">
+    <div className=" w-full px-4 py-8 bg-gradient-to-br from-black to-gray-900/10 flex flex-col items-center">
       <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-gray-400 to-gray-600 bg-clip-text text-transparent mb-6 text-center">
         Templates Preview
       </h1>
@@ -105,7 +113,6 @@ const Loading = () => (
           isRunning={isAutoPlaying}
         />
       </div>
-
 
       {/* Resume Container */}
       <div className="relative w-full max-w-[794px] mx-auto">
@@ -144,21 +151,25 @@ const Loading = () => (
 
       {/* Controls */}
       <div className="mt-6 flex flex-wrap justify-center gap-4">
+        {/* Play / Pause Button */}
         <button
           onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-          className={`px-6 py-2 rounded-full text-white font-semibold ${
-            isAutoPlaying ? "bg-red-600" : "bg-green-600"
-          } hover:brightness-110 transition-all`}
+          className={`px-6 py-2 rounded-full text-white font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ${
+            isAutoPlaying
+              ? "bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800"
+              : "bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800"
+          }`}
         >
           {isAutoPlaying ? "Pause" : "Play"}
         </button>
 
+        {/* Restart Button */}
         <button
           onClick={() => {
             setCurrentIndex(0);
             setIsAutoPlaying(true);
           }}
-          className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:brightness-110 transition-all"
+          className="px-6 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           Restart
         </button>

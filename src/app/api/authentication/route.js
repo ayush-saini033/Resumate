@@ -26,6 +26,7 @@ export async function GET() {
       return NextResponse.json({
         message: `Welcome back ${existUser.name}`,
         success: true,
+        user: existUser
       });
     } else {
       return NextResponse.json({

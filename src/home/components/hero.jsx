@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Hero = () => {
   const router = useRouter();
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden mt-24 md:mt-14">
+    <section className="relative flex items-center justify-center overflow-hidden py-20 md:py-32 lg:py-40">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-black">
         <div className="absolute top-1/4 left-1/4 w-[18rem] h-[18rem] bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
